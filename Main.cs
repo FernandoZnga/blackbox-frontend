@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Net;
+using System.Net.Sockets;
+using System.IO;
+
 namespace Blackbox.Client
 {
     public partial class Main : Form
     {
         public Main()
         {
-            InitializeComponent();
+            //InitializeComponent();
+            SocketConn.SynchronousSocketClient.StartClient();
         }
     }
 }
