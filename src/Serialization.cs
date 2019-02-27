@@ -3,9 +3,6 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
  
-// Used for writing to a file
-using System.IO;
- 
 // Used to serialize an object to binary format
 using System.Runtime.Serialization.Formatters.Binary;
  
