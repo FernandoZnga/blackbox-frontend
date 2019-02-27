@@ -9,7 +9,7 @@ namespace Blackbox.Client
     {
 		public class SynchronousSocketClient {  
 		  
-		    public static void StartClient() {  
+		    public static void StartClient(string xmlText) {  
 		        // Data buffer for incoming data.  
 		        byte[] bytes = new byte[1024];  
 		  
@@ -33,7 +33,7 @@ namespace Blackbox.Client
 		                    sender.RemoteEndPoint.ToString());  
 		  
 		                // Encode the data string into a byte array.  
-		                byte[] msg = Encoding.ASCII.GetBytes("This is a test<EOF>");  
+		                byte[] msg = Encoding.ASCII.GetBytes(xmlText + "<EOF>");  
 		  
 		                // Send the data through the socket.  
 		                int bytesSent = sender.Send(msg);  
@@ -60,10 +60,10 @@ namespace Blackbox.Client
 		        }  
 		    }  
 		  
-		    public static int Main(String[] args) {  
-		        StartClient();  
-		        return 0;  
-		    }  
+		    //public static int Main(String[] args) {  
+		    //    StartClient();  
+		    //    return 0;  
+		    //}  
 		}  
     }
 }

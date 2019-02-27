@@ -1,10 +1,8 @@
 using System;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Blackbox.Client
 {
-	[Serializable()]
+    [Serializable()]
 	public class CcPinNumber
 	{
 		public string CcNumber { get; set; }
