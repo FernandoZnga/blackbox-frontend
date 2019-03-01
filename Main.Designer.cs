@@ -1,4 +1,4 @@
-﻿namespace Blackbox.Client
+﻿namespace Blackbox.Server
 {
     partial class Main
     {
@@ -267,6 +267,7 @@
             this.Controls.Add(this.CcNumberLabel);
             this.Controls.Add(this.CcNumber);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ATM";
             this.ResumeLayout(false);
             this.PerformLayout();

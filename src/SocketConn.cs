@@ -1,9 +1,10 @@
-﻿using System;  
+﻿using Blackbox.Server.Prop;
+using System;  
 using System.Net;  
 using System.Net.Sockets;  
 using System.Text; 
 
-namespace Blackbox.Client
+namespace Blackbox.Server
 {
     public class SocketConn
     {
@@ -36,15 +37,22 @@ namespace Blackbox.Client
 		                byte[] msg = Encoding.ASCII.GetBytes(xmlText + "<EOF>");  
 		  
 		                // Send the data through the socket.  
-		                int bytesSent = sender.Send(msg);  
+		                int bytesSent = sender.Send(msg);
+                        Console.WriteLine("Echoed test = {0}",
+                            Encoding.ASCII.GetString(msg, 0, bytesSent));
 		  
 		                // Receive the response from the remote device.  
 		                int bytesRec = sender.Receive(bytes);  
 		                Console.WriteLine("Echoed test = {0}",  
-		                    Encoding.ASCII.GetString(bytes,0,bytesRec));  
-		  
-		                // Release the socket.  
-		                sender.Shutdown(SocketShutdown.Both);  
+		                    Encoding.ASCII.GetString(bytes,0,bytesRec));
+                        var content = Encoding.ASCII.GetString(bytes,0,bytesRec);
+
+                        // Here goes the action for the text received from server
+                        Handle.ReadText(content);
+                        //
+
+                        // Release the socket.  
+                        sender.Shutdown(SocketShutdown.Both);  
 		                sender.Close();  
 		  
 		            } catch (ArgumentNullException ane) {  

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Blackbox.Client
+namespace Blackbox.Server
 {
     static class Program
     {

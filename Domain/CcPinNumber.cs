@@ -1,6 +1,6 @@
 using System;
 
-namespace Blackbox.Client
+namespace Blackbox.Server
 {
     [Serializable()]
 	public class CcPinNumber
@@ -8,7 +8,7 @@ namespace Blackbox.Client
 		public string CcNumber { get; set; }
 		public string PinNumber { get; set; }
 
-		public CcPinNumber(){}
+		public CcPinNumber() { }
 		public CcPinNumber(string ccNumber, string pinNumber)
 		{
 			CcNumber = ccNumber;

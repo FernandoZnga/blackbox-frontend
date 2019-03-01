@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blackbox.Client.Properties
+namespace Blackbox.Server.Properties
 {
 
 

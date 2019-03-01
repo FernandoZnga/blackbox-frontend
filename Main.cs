@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Blackbox.Server.Prop;
+using System;
 using System.Windows.Forms;
 
-namespace Blackbox.Client
+namespace Blackbox.Server
 {
     public partial class Main : Form
     {
@@ -10,6 +11,18 @@ namespace Blackbox.Client
             InitializeComponent();
             PinNumberLabel.Visible = false;
             PinNumber.Visible = false;
+        }
+
+        public static void ShowInvalidCcPinNumberMessage()
+        {
+            MessageBox.Show("Invalida Credit Card or Pin number.");
+        }
+
+        public static void ShowHome(CcPinNumberResponse ccPinNumberResponse)
+        {
+            ActiveForm.Hide();
+            Home home = new Home(ccPinNumberResponse.Account);
+            home.ShowDialog();
         }
 
         private void One_Click(object sender, EventArgs e)
