@@ -42,7 +42,7 @@
             this.Four = new System.Windows.Forms.Button();
             this.Two = new System.Windows.Forms.Button();
             this.One = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ScreenText = new System.Windows.Forms.TextBox();
             this.Withdraw = new System.Windows.Forms.Button();
             this.Balance = new System.Windows.Forms.Button();
             this.Other = new System.Windows.Forms.Button();
@@ -141,6 +141,7 @@
             this.ClearBtn.TabIndex = 11;
             this.ClearBtn.Text = "Clear";
             this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // CancelBtn
             // 
@@ -194,15 +195,21 @@
             this.One.Text = "1";
             this.One.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // ScreenText
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(100, 25);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(134, 120);
-            this.textBox1.TabIndex = 17;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ScreenText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScreenText.BackColor = System.Drawing.SystemColors.Window;
+            this.ScreenText.Enabled = false;
+            this.ScreenText.Font = new System.Drawing.Font("Segoe UI Emoji", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScreenText.ForeColor = System.Drawing.Color.Black;
+            this.ScreenText.Location = new System.Drawing.Point(100, 25);
+            this.ScreenText.Multiline = true;
+            this.ScreenText.Name = "ScreenText";
+            this.ScreenText.Size = new System.Drawing.Size(134, 120);
+            this.ScreenText.TabIndex = 17;
+            this.ScreenText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Withdraw
             // 
@@ -275,7 +282,7 @@
             this.Controls.Add(this.Transfer);
             this.Controls.Add(this.Balance);
             this.Controls.Add(this.Withdraw);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.ScreenText);
             this.Controls.Add(this.Nine);
             this.Controls.Add(this.Zero);
             this.Controls.Add(this.Eight);
@@ -314,7 +321,7 @@
         private System.Windows.Forms.Button Four;
         private System.Windows.Forms.Button Two;
         private System.Windows.Forms.Button One;
-        private System.Windows.Forms.TextBox textBox1;
+        public  System.Windows.Forms.TextBox ScreenText;
         private System.Windows.Forms.Button Withdraw;
         private System.Windows.Forms.Button Balance;
         private System.Windows.Forms.Button Other;
