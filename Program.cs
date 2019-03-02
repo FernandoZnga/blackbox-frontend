@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Blackbox.Client
+namespace Blackbox.Server
 {
     static class Program
     {
@@ -17,7 +14,7 @@ namespace Blackbox.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
-            SocketConn.SynchronousSocketClient.StartClient();
+            //SocketConn.SynchronousSocketClient.StartClient();
         }
     }
 }
