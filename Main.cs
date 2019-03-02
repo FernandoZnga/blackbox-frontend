@@ -10,12 +10,23 @@ namespace Blackbox.Server
         {
             InitializeComponent();
             PinNumberLabel.Visible = false;
+            PinNumber.Clear();
             PinNumber.Visible = false;
+            CcNumber.Clear();
+            CcNumber.Visible = true;
         }
 
         public static void ShowInvalidCcPinNumberMessage()
         {
             MessageBox.Show("Invalida Credit Card or Pin number.");
+        }
+
+        public static void ShowInvalidTokenMessage()
+        {
+            MessageBox.Show("String violation. No transaction performed.");
+            ActiveForm.Hide();
+            Main main = new Main();
+            main.ShowDialog();
         }
 
         public static void ShowHome(CcPinNumberResponse ccPinNumberResponse)
