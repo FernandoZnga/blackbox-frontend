@@ -45,7 +45,7 @@ namespace Blackbox.Server
 		                int bytesRec = sender.Receive(bytes);  
 		                Console.WriteLine("Echoed test = {0}",  
 		                    Encoding.ASCII.GetString(bytes,0,bytesRec));
-                        var content = Encoding.ASCII.GetString(bytes,0,bytesRec);
+                        var content = Encoding.ASCII.GetString(bytes, 0, bytesRec);
 
                         // Here goes the action for the text received from server
                         Handle.ReadText(content);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Blackbox.Client.src;
 using System.Xml.Linq;
 
 namespace Blackbox.Server.Prop
@@ -22,7 +17,17 @@ namespace Blackbox.Server.Prop
                 if (api == "GeneralResponse")
                 {
                     var generalResponse = Serialization.DeserializeGeneralResponse(xmlText);
-                    if (generalResponse.Response == 500)
+                    GeneralResponse response = new GeneralResponse
+                    {
+                        Response = generalResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.
+                        SerializeGeneralResponse(response.Response)) != generalResponse.Key ||
+                        generalResponse.Response == 601)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else if (generalResponse.Response == 500)
                     {
                         Main.ShowInvalidCcPinNumberMessage();
                     }
@@ -34,12 +39,37 @@ namespace Blackbox.Server.Prop
                 else if (api == "CcPinNumberResponse")
                 {
                     var ccPinNumberResponse = Serialization.DeserializeCcPinNumberResponse(xmlText);
-                    Main.ShowHome(ccPinNumberResponse);
+                    CcPinNumberResponse ccPinNumber = new CcPinNumberResponse
+                    {
+                        Account = ccPinNumberResponse.Account,
+                        Response = ccPinNumberResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeCcPinNumberResponse(ccPinNumber.Account, ccPinNumber.Response)) != ccPinNumberResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Main.ShowHome(ccPinNumberResponse);
+                    }
                 }
                 else if (api == "AccountBalanceResponse")
                 {
                     var accountBalanceResponse = Serialization.DeserializeAccountBalanceResponse(xmlText);
-                    Home.ShowAccountBalance(accountBalanceResponse);
+                    AccountBalanceResponse accountBalance = new AccountBalanceResponse
+                    {
+                        AccountId = accountBalanceResponse.AccountId,
+                        Balance = accountBalanceResponse.Balance,
+                        Response = accountBalanceResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeAccountBalanceResponse(accountBalance.AccountId, accountBalance.Balance, accountBalance.Response)) != accountBalanceResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.ShowAccountBalance(accountBalanceResponse);
+                    }
                 }
             }
         }

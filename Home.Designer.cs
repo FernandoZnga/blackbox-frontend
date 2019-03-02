@@ -45,7 +45,7 @@
             this.ScreenText = new System.Windows.Forms.TextBox();
             this.Withdraw = new System.Windows.Forms.Button();
             this.Balance = new System.Windows.Forms.Button();
-            this.Other = new System.Windows.Forms.Button();
+            this.Deposit = new System.Windows.Forms.Button();
             this.Transfer = new System.Windows.Forms.Button();
             this.PayService = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -232,14 +232,15 @@
             this.Balance.UseVisualStyleBackColor = true;
             this.Balance.Click += new System.EventHandler(this.Balance_Click);
             // 
-            // Other
+            // Deposit
             // 
-            this.Other.Font = new System.Drawing.Font("Segoe UI Emoji", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Other.Location = new System.Drawing.Point(29, 104);
-            this.Other.Name = "Other";
-            this.Other.Size = new System.Drawing.Size(65, 40);
-            this.Other.TabIndex = 18;
-            this.Other.UseVisualStyleBackColor = true;
+            this.Deposit.Font = new System.Drawing.Font("Segoe UI Emoji", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Deposit.Location = new System.Drawing.Point(29, 104);
+            this.Deposit.Name = "Deposit";
+            this.Deposit.Size = new System.Drawing.Size(65, 40);
+            this.Deposit.TabIndex = 18;
+            this.Deposit.Text = "Deposit";
+            this.Deposit.UseVisualStyleBackColor = true;
             // 
             // Transfer
             // 
@@ -278,7 +279,7 @@
             this.ClientSize = new System.Drawing.Size(334, 411);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.PayService);
-            this.Controls.Add(this.Other);
+            this.Controls.Add(this.Deposit);
             this.Controls.Add(this.Transfer);
             this.Controls.Add(this.Balance);
             this.Controls.Add(this.Withdraw);
@@ -324,7 +325,7 @@
         public  System.Windows.Forms.TextBox ScreenText;
         private System.Windows.Forms.Button Withdraw;
         private System.Windows.Forms.Button Balance;
-        private System.Windows.Forms.Button Other;
+        private System.Windows.Forms.Button Deposit;
         private System.Windows.Forms.Button Transfer;
         private System.Windows.Forms.Button PayService;
         private System.Windows.Forms.Button button6;
