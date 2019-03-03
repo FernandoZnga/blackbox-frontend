@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blackbox.Server
+namespace Blackbox.Client.Domain
 {
     [Serializable()]
     public class AccountBalance

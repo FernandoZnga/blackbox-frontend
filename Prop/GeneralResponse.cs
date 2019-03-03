@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blackbox.Server.Prop
+namespace Blackbox.Client.Prop
 {
     [Serializable()]
     public class GeneralResponse

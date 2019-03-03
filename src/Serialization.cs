@@ -1,10 +1,10 @@
 using System.Xml.Serialization;
 using System.IO;
-using Blackbox.Server.Prop;
-using Blackbox.Client.src;
+using Blackbox.Client.Domain;
+using Blackbox.Client.Prop;
 using System;
 
-namespace Blackbox.Server
+namespace Blackbox.Client.src
 {
     public class Serialization
     {
@@ -86,7 +86,7 @@ namespace Blackbox.Server
 
         internal static string SerializeAccountBalanceResponse(int accountId, double balance, int response)
         {
-            AccountBalanceResponse accountBalanceResponse = new AccountBalanceResponse
+            AccountBalanceResponse accountInfo = new AccountBalanceResponse
             {
                 AccountId = accountId,
                 Balance = balance,
@@ -96,7 +96,34 @@ namespace Blackbox.Server
             XmlSerializer xml = new XmlSerializer(typeof(AccountBalanceResponse));
             using (StringWriter stringWriter = new StringWriter())
             {
-                xml.Serialize(stringWriter, accountBalanceResponse);
+                xml.Serialize(stringWriter, accountInfo);
+                return stringWriter.ToString();
+            };
+        }
+
+        internal static WithdrawResponse DeserializeWithdrawResponse(string accountInfo)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(WithdrawResponse));
+            using (StringReader stringReader = new StringReader(accountInfo))
+            {
+                return (WithdrawResponse)(xml.Deserialize(stringReader));
+            }
+        }
+
+        internal static string SerializeWithdrawResponse(int accountId, double newBalance, string accountTypeName, int response)
+        {
+            WithdrawResponse accountInfo = new WithdrawResponse
+            {
+                AccountId = accountId,
+                NewBalance = newBalance,
+                AccountTypeName = accountTypeName,
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(WithdrawResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
                 return stringWriter.ToString();
             };
         }
@@ -125,6 +152,25 @@ namespace Blackbox.Server
                 GeneralResponse generalResponse = (GeneralResponse)xml.Deserialize(stringReader);
                 return generalResponse;
             }
+        }
+
+        public static string SerializeWithdraw(int accountId, double amount)
+        {
+            Withdraw accountInfo = new Withdraw
+            {
+                AccountId = accountId,
+                Amount = amount
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(Withdraw));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
+                accountInfo.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, accountInfo);
+                return stringWriterNew.ToString();
+            };
         }
     }
 }
