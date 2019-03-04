@@ -1,4 +1,5 @@
-﻿using Blackbox.Server.Prop;
+﻿using Blackbox.Client.src;
+using Blackbox.Server.Prop;
 using System;  
 using System.Net;  
 using System.Net.Sockets;  
@@ -28,27 +29,33 @@ namespace Blackbox.Server
 		  
 		            // Connect the socket to the remote endpoint. Catch any errors.  
 		            try {  
-		                sender.Connect(remoteEP);  
-		  
-		                Console.WriteLine("Socket connected to {0}",  
-		                    sender.RemoteEndPoint.ToString());  
-		  
-		                // Encode the data string into a byte array.  
-		                byte[] msg = Encoding.ASCII.GetBytes(xmlText + "<EOF>");  
+		                sender.Connect(remoteEP);
+
+                        Console.WriteLine("Socket connected to {0}",
+                            sender.RemoteEndPoint.ToString());
+                        Console.WriteLine("XML text sent = {0}",
+                            xmlText);
+
+                        // Encode the data string into a byte array.  
+                        //Encryption.Encrypt(xmlText, "Security1234");
+                        byte[] msg = Encoding.ASCII.GetBytes(Encryption.Encrypt(xmlText, "Security1234"));  
 		  
 		                // Send the data through the socket.  
 		                int bytesSent = sender.Send(msg);
-                        Console.WriteLine("Echoed test = {0}",
+                        Console.WriteLine("Encrypted text sent = {0}",
                             Encoding.ASCII.GetString(msg, 0, bytesSent));
 		  
 		                // Receive the response from the remote device.  
 		                int bytesRec = sender.Receive(bytes);  
-		                Console.WriteLine("Echoed test = {0}",  
+		                Console.WriteLine("Encrypted text received = {0}",  
 		                    Encoding.ASCII.GetString(bytes,0,bytesRec));
                         var content = Encoding.ASCII.GetString(bytes, 0, bytesRec);
 
+                        var contentText = Encryption.Decrypt(content, "Security1234");
+                        Console.WriteLine("Decrypted text received = {0}",
+                            contentText);
                         // Here goes the action for the text received from server
-                        Handle.ReadText(content);
+                        Handle.ReadText(contentText);
                         //
 
                         // Release the socket.  
