@@ -238,6 +238,7 @@
             this.Deposit.TabIndex = 18;
             this.Deposit.Text = "Deposit";
             this.Deposit.UseVisualStyleBackColor = true;
+            this.Deposit.Click += new System.EventHandler(this.Deposit_Click);
             // 
             // Transfer
             // 

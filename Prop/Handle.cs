@@ -36,6 +36,10 @@ namespace Blackbox.Client.Prop
                     {
                         Home.ShowBalanceErrorMessage();
                     }
+                    else if (generalResponse.Response == 701)
+                    {
+                        Home.ShowCheckAmount();
+                    }
                 }
                 else if (api == "CcPinNumberResponse")
                 {
@@ -89,6 +93,25 @@ namespace Blackbox.Client.Prop
                     else
                     {
                         Home.WithdrawResult(withdraw);
+                    }
+                }
+                else if (api == "DepositResponse")
+                {
+                    var depositResponse = Serialization.DeserializeDepositResponse(xmlText);
+                    DepositResponse deposit = new DepositResponse
+                    {
+                        AccountId = depositResponse.AccountId,
+                        NewBalance = depositResponse.NewBalance,
+                        AccountTypeName = depositResponse.AccountTypeName,
+                        Response = depositResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeDepositResponse(deposit.AccountId, deposit.NewBalance, deposit.AccountTypeName, deposit.Response)) != depositResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.DepositResult(deposit);
                     }
                 }
             }
