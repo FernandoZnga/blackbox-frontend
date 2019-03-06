@@ -249,6 +249,7 @@
             this.Transfer.TabIndex = 18;
             this.Transfer.Text = "Transfer";
             this.Transfer.UseVisualStyleBackColor = true;
+            this.Transfer.Click += new System.EventHandler(this.Transfer_Click);
             // 
             // PayService
             // 

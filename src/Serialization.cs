@@ -156,6 +156,34 @@ namespace Blackbox.Client.src
             };
         }
 
+        internal static TransferResponse DeserializeTransferResponse(string accountInfo)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(TransferResponse));
+            using (StringReader stringReader = new StringReader(accountInfo))
+            {
+                return (TransferResponse)(xml.Deserialize(stringReader));
+            }
+        }
+
+        internal static string SerializeTransferResponse(int accountId, double newBalance, string accountTypeName, int accountIdDestiny, int response)
+        {
+            TransferResponse accountInfo = new TransferResponse
+            {
+                AccountId = accountId,
+                NewBalance = newBalance,
+                AccountTypeName = accountTypeName,
+                AccountIdDestiny = accountIdDestiny,
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(TransferResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
+                return stringWriter.ToString();
+            };
+        }
+
         public static CcPinNumberResponse DeserializeCcPinNumberResponse(string accountInfo)
         {
             XmlSerializer xml = new XmlSerializer(typeof(CcPinNumberResponse));
@@ -210,6 +238,26 @@ namespace Blackbox.Client.src
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(Deposit));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
+                accountInfo.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, accountInfo);
+                return stringWriterNew.ToString();
+            };
+        }
+
+        internal static string SerializeTransfer(int accountId, double transferAmount, int transferAccount)
+        {
+            Transfer accountInfo = new Transfer
+            {
+                AccountId = accountId,
+                Amount = transferAmount,
+                AccountIdDestiny = transferAccount
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(Transfer));
             using (StringWriter stringWriter = new StringWriter())
             {
                 xml.Serialize(stringWriter, accountInfo);

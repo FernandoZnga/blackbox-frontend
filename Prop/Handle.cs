@@ -114,6 +114,26 @@ namespace Blackbox.Client.Prop
                         Home.DepositResult(deposit);
                     }
                 }
+                else if (api == "TransferResponse")
+                {
+                    var transferResponse = Serialization.DeserializeTransferResponse(xmlText);
+                    TransferResponse transfer = new TransferResponse
+                    {
+                        AccountId = transferResponse.AccountId,
+                        NewBalance = transferResponse.NewBalance,
+                        AccountTypeName = transferResponse.AccountTypeName,
+                        AccountIdDestiny = transferResponse.AccountIdDestiny,
+                        Response = transferResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeTransferResponse(transfer.AccountId, transfer.NewBalance, transfer.AccountTypeName, transfer.AccountIdDestiny, transfer.Response)) != transferResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.TransferResult(transfer);
+                    }
+                }
             }
         }
     }
