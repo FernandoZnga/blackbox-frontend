@@ -10,6 +10,8 @@ namespace Blackbox.Client
     {
         public string action = string.Empty;
         public string withdrawAmount = string.Empty;
+        public string transferAmount = string.Empty;
+        public string transferAccount = string.Empty;
         public string depositAmount = string.Empty;
         public int Account;
 
@@ -72,6 +74,16 @@ namespace Blackbox.Client
                 depositAmount += One.Text;
                 ScreenText.AppendText(One.Text);
             }
+            else if (action == "Transfer")
+            {
+                transferAmount += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
         }
 
         private void Two_Click(object sender, EventArgs e)
@@ -84,6 +96,16 @@ namespace Blackbox.Client
             else if (action == "Deposit")
             {
                 depositAmount += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "Transfer")
+            {
+                transferAmount += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
         }
@@ -100,6 +122,16 @@ namespace Blackbox.Client
                 depositAmount += Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
+            else if (action == "Transfer")
+            {
+                transferAmount += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
         }
 
         private void Four_Click(object sender, EventArgs e)
@@ -112,6 +144,16 @@ namespace Blackbox.Client
             else if (action == "Deposit")
             {
                 depositAmount += Four.Text;
+                ScreenText.AppendText(Four.Text);
+            }
+            else if (action == "Transfer")
+            {
+                transferAmount += Four.Text;
+                ScreenText.AppendText(Four.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Four.Text;
                 ScreenText.AppendText(Four.Text);
             }
         }
@@ -128,6 +170,16 @@ namespace Blackbox.Client
                 depositAmount += Five.Text;
                 ScreenText.AppendText(Five.Text);
             }
+            else if (action == "Transfer")
+            {
+                transferAmount += Five.Text;
+                ScreenText.AppendText(Five.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Five.Text;
+                ScreenText.AppendText(Five.Text);
+            }
         }
 
         private void Six_Click(object sender, EventArgs e)
@@ -140,6 +192,16 @@ namespace Blackbox.Client
             else if (action == "Deposit")
             {
                 depositAmount += Six.Text;
+                ScreenText.AppendText(Six.Text);
+            }
+            else if (action == "Transfer")
+            {
+                transferAmount += Six.Text;
+                ScreenText.AppendText(Six.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
         }
@@ -156,6 +218,16 @@ namespace Blackbox.Client
                 depositAmount += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
             }
+            else if (action == "Transfer")
+            {
+                transferAmount += Seven.Text;
+                ScreenText.AppendText(Seven.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Seven.Text;
+                ScreenText.AppendText(Seven.Text);
+            }
         }
 
         private void Eight_Click(object sender, EventArgs e)
@@ -168,6 +240,16 @@ namespace Blackbox.Client
             else if (action == "Deposit")
             {
                 depositAmount += Eight.Text;
+                ScreenText.AppendText(Eight.Text);
+            }
+            else if (action == "Transfer")
+            {
+                transferAmount += Eight.Text;
+                ScreenText.AppendText(Eight.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
             }
         }
@@ -184,6 +266,16 @@ namespace Blackbox.Client
                 depositAmount += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
             }
+            else if (action == "Transfer")
+            {
+                transferAmount += Nine.Text;
+                ScreenText.AppendText(Nine.Text);
+            }
+            else if (action == "TransferAccount")
+            {
+                transferAccount += Nine.Text;
+                ScreenText.AppendText(Nine.Text);
+            }
         }
 
         private void Zero_Click(object sender, EventArgs e)
@@ -198,6 +290,16 @@ namespace Blackbox.Client
                 depositAmount += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
             }
+            else if (transferAmount.Length > 0 && action == "Transfer")
+            {
+                transferAmount += Zero.Text;
+                ScreenText.AppendText(Zero.Text);
+            }
+            else if (transferAccount.Length > 0 && action == "TransferAcount")
+            {
+                transferAccount += Zero.Text;
+                ScreenText.AppendText(Zero.Text);
+            }
         }
 
         private void EnterBtn_Click(object sender, EventArgs e)
@@ -209,6 +311,19 @@ namespace Blackbox.Client
             else if (depositAmount.Length > 0)
             {
                 StartClient(Serialization.SerializeDeposit(Account, Convert.ToDouble(depositAmount)));
+            }
+            else if (transferAmount.Length == 0)
+            {
+                MessageBox.Show("Enter Amount to continue");
+            }
+            else if (transferAmount.Length > 0 && transferAccount.Length == 0)
+            {
+                action = "TransferAccount";
+                ScreenText.AppendText("\n\nEnter Account Number\n -->");
+            }
+            else if (action == "TransferAccount" && transferAccount.Length > 0)
+            {
+                StartClient(Serialization.SerializeTransfer(Account, Convert.ToDouble(transferAmount), Convert.ToInt32(transferAccount)));
             }
             else
             {
@@ -228,12 +343,13 @@ namespace Blackbox.Client
             MessageBox.Show("Account type: " + withdraw.AccountTypeName +
                 "\nYour Current Balance is $" + withdraw.NewBalance +
                 "\nYou can take your money");
+            action = string.Empty;
         }
 
         private void Deposit_Click(object sender, EventArgs e)
         {
             action = Deposit.Text;
-            withdrawAmount = "";
+            depositAmount = "";
             ScreenText.Clear();
             ScreenText.Text = "Enter deposit amount\n --> ";
         }
@@ -249,6 +365,31 @@ namespace Blackbox.Client
             ScreenText.Text = "";
             MessageBox.Show("Account type: " + deposit.AccountTypeName +
                 "\nYour Current Balance is $" + deposit.NewBalance);
+            action = string.Empty;
+        }
+
+        private void Transfer_Click(object sender, EventArgs e)
+        {
+            action = Transfer.Text;
+            transferAmount = "";
+            transferAccount = "";
+            ScreenText.Clear();
+            ScreenText.Text = "Enter transfer amount\n -->";
+        }
+
+        internal static void TransferResult(TransferResponse transfer)
+        {
+            Home home = new Home(transfer.AccountId);
+            home.ShowTransfer(transfer);
+        }
+
+        private void ShowTransfer(TransferResponse transfer)
+        {
+            ScreenText.Text = "";
+            MessageBox.Show("Account type: " + transfer.AccountTypeName +
+                "\nTransfer to the account " + transfer.AccountIdDestiny + " Done!" +
+                "\nYour New Balance is $" + transfer.NewBalance);
+            action = string.Empty;
         }
     }
 }

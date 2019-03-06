@@ -49,6 +49,7 @@
     <Compile Include="Domain\AccountBalance.cs" />
     <Compile Include="Domain\CcPinNumber.cs" />
     <Compile Include="Domain\Deposit.cs" />
+    <Compile Include="Domain\Transfer.cs" />
     <Compile Include="Domain\Withdraw.cs" />
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
@@ -69,6 +70,7 @@
     <Compile Include="Prop\DepositResponse.cs" />
     <Compile Include="Prop\GeneralResponse.cs" />
     <Compile Include="Prop\Handle.cs" />
+    <Compile Include="Prop\TransferResponse.cs" />
     <Compile Include="Prop\WithdrawResponse.cs" />
     <Compile Include="src\Encryption.cs" />
     <Compile Include="src\GenerateKey.cs" />
