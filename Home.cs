@@ -45,7 +45,17 @@ namespace Blackbox.Client
 
         private void ClearBtn_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        internal void Reset()
+        {
             ScreenText.Clear();
+            transferAccount = string.Empty;
+            transferAmount = string.Empty;
+            withdrawAmount = string.Empty;
+            depositAmount = string.Empty;
+            action = string.Empty;
         }
 
         private void Withdraw_Click(object sender, EventArgs e)
@@ -53,7 +63,7 @@ namespace Blackbox.Client
             action = Withdraw.Text;
             withdrawAmount = "";
             ScreenText.Clear();
-            ScreenText.Text = "Enter withdraw amount\n --> ";
+            ScreenText.Text = "Enter withdraw amount" + Environment.NewLine + "--> ";
         }
 
         internal static void ShowCheckAmount()
@@ -306,11 +316,13 @@ namespace Blackbox.Client
         {
             if (withdrawAmount.Length > 0)
             {
-                StartClient(Serialization.SerializeWithdraw(Account, Convert.ToDouble(withdrawAmount)));
+                StartClient(Serialization.SerializeWithdraw(Account, 
+                    Convert.ToDouble(withdrawAmount)));
             }
             else if (depositAmount.Length > 0)
             {
-                StartClient(Serialization.SerializeDeposit(Account, Convert.ToDouble(depositAmount)));
+                StartClient(Serialization.SerializeDeposit(Account, 
+                    Convert.ToDouble(depositAmount)));
             }
             else if (transferAmount.Length == 0)
             {
@@ -319,11 +331,13 @@ namespace Blackbox.Client
             else if (transferAmount.Length > 0 && transferAccount.Length == 0)
             {
                 action = "TransferAccount";
-                ScreenText.AppendText("\n\nEnter Account Number\n -->");
+                ScreenText.AppendText(Environment.NewLine + "Enter Account Number" + 
+                    Environment.NewLine + "-->");
             }
             else if (action == "TransferAccount" && transferAccount.Length > 0)
             {
-                StartClient(Serialization.SerializeTransfer(Account, Convert.ToDouble(transferAmount), Convert.ToInt32(transferAccount)));
+                StartClient(Serialization.SerializeTransfer(Account, 
+                    Convert.ToDouble(transferAmount), Convert.ToInt32(transferAccount)));
             }
             else
             {
@@ -335,15 +349,16 @@ namespace Blackbox.Client
         {
             Home home = new Home(withdraw.AccountId);
             home.ShowWithdraw(withdraw);
+            home.Reset();
         }
 
         public void ShowWithdraw(WithdrawResponse withdraw)
         {
             ScreenText.Text = "";
             MessageBox.Show("Account type: " + withdraw.AccountTypeName +
-                "\nYour Current Balance is $" + withdraw.NewBalance +
-                "\nYou can take your money");
-            action = string.Empty;
+                Environment.NewLine + "Your Current Balance is $" + withdraw.NewBalance +
+                Environment.NewLine + "You can take your money");
+            //Reset();
         }
 
         private void Deposit_Click(object sender, EventArgs e)
@@ -351,21 +366,22 @@ namespace Blackbox.Client
             action = Deposit.Text;
             depositAmount = "";
             ScreenText.Clear();
-            ScreenText.Text = "Enter deposit amount\n --> ";
+            ScreenText.Text = "Enter deposit amount" + Environment.NewLine + "--> ";
         }
 
         public static void DepositResult(DepositResponse deposit)
         {
             Home home = new Home(deposit.AccountId);
             home.ShowDeposit(deposit);
+            home.Reset();
         }
 
         public void ShowDeposit(DepositResponse deposit)
         {
             ScreenText.Text = "";
             MessageBox.Show("Account type: " + deposit.AccountTypeName +
-                "\nYour Current Balance is $" + deposit.NewBalance);
-            action = string.Empty;
+                Environment.NewLine + "Your Current Balance is $" + deposit.NewBalance);
+            //Reset();
         }
 
         private void Transfer_Click(object sender, EventArgs e)
@@ -374,22 +390,23 @@ namespace Blackbox.Client
             transferAmount = "";
             transferAccount = "";
             ScreenText.Clear();
-            ScreenText.Text = "Enter transfer amount\n -->";
+            ScreenText.Text = "Enter transfer amount" + Environment.NewLine + "-->";
         }
 
         internal static void TransferResult(TransferResponse transfer)
         {
             Home home = new Home(transfer.AccountId);
             home.ShowTransfer(transfer);
+            home.Reset();
         }
 
         private void ShowTransfer(TransferResponse transfer)
         {
             ScreenText.Text = "";
             MessageBox.Show("Account type: " + transfer.AccountTypeName +
-                "\nTransfer to the account " + transfer.AccountIdDestiny + " Done!" +
-                "\nYour New Balance is $" + transfer.NewBalance);
-            action = string.Empty;
+                Environment.NewLine + "Transfer to the account " + transfer.AccountIdDestiny + " Done!" +
+                Environment.NewLine + "Your New Balance is $" + transfer.NewBalance);
+            //Reset();
         }
     }
 }
