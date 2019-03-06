@@ -1,11 +1,10 @@
-﻿using Blackbox.Client.src;
-using Blackbox.Server.Prop;
-using System;  
-using System.Net;  
-using System.Net.Sockets;  
-using System.Text; 
+﻿using Blackbox.Client.Prop;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
-namespace Blackbox.Server
+namespace Blackbox.Client.src
 {
     public class SocketConn
     {
@@ -38,7 +37,7 @@ namespace Blackbox.Server
 
                         // Encode the data string into a byte array.  
                         //Encryption.Encrypt(xmlText, "Security1234");
-                        byte[] msg = Encoding.ASCII.GetBytes(Encryption.Encrypt(xmlText, "Security1234"));  
+                        byte[] msg = Encoding.ASCII.GetBytes(Encryption.Encrypt(xmlText, "Security1234") + "<EOF>");  
 		  
 		                // Send the data through the socket.  
 		                int bytesSent = sender.Send(msg);

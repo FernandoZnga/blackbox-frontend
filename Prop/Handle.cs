@@ -1,7 +1,8 @@
 ﻿using Blackbox.Client.src;
+using System;
 using System.Xml.Linq;
 
-namespace Blackbox.Server.Prop
+namespace Blackbox.Client.Prop
 {
     public class Handle
     {
@@ -69,6 +70,25 @@ namespace Blackbox.Server.Prop
                     else
                     {
                         Home.ShowAccountBalance(accountBalanceResponse);
+                    }
+                }
+                else if (api == "WithdrawResponse")
+                {
+                    var withdrawResponse = Serialization.DeserializeWithdrawResponse(xmlText);
+                    WithdrawResponse withdraw = new WithdrawResponse
+                    {
+                        AccountId = withdrawResponse.AccountId,
+                        NewBalance = withdrawResponse.NewBalance,
+                        AccountTypeName = withdrawResponse.AccountTypeName,
+                        Response = withdrawResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeWithdrawResponse(withdraw.AccountId, withdraw.NewBalance, withdraw.AccountTypeName, withdraw.Response)) != withdrawResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.WithdrawResult(withdraw);
                     }
                 }
             }

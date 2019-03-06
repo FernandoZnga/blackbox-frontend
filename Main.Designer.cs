@@ -1,4 +1,4 @@
-﻿namespace Blackbox.Server
+﻿namespace Blackbox.Client
 {
     partial class Main
     {
