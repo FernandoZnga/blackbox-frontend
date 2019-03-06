@@ -8,6 +8,21 @@ namespace Blackbox.Client.src
 {
     public class Serialization
     {
+        public static string SerializeGeneralResponse(int response)
+        {
+            GeneralResponse generalResponse = new GeneralResponse
+            {
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(GeneralResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, generalResponse);
+                return stringWriter.ToString();
+            };
+        }
+
         public static string SerializeCcPinNumber(string ccNumber, string pinNumber)
         {
             CcPinNumber CardInfo = new CcPinNumber
@@ -27,21 +42,6 @@ namespace Blackbox.Client.src
             };
         }
 
-        public static string SerializeGeneralResponse(int response)
-        {
-            GeneralResponse generalResponse = new GeneralResponse
-            {
-                Response = response
-            };
-
-            XmlSerializer xml = new XmlSerializer(typeof(GeneralResponse));
-            using (StringWriter stringWriter = new StringWriter())
-            {
-                xml.Serialize(stringWriter, generalResponse);
-                return stringWriter.ToString();
-            };
-        }
-
         public static void DeserializeCcPinNumber(string CardInfo)
         {
             XmlSerializer xml = new XmlSerializer(typeof(CcPinNumber));
@@ -49,23 +49,6 @@ namespace Blackbox.Client.src
             {
                 CcPinNumber ccPinNUmber = (CcPinNumber)(xml.Deserialize(stringReader));
             }
-        }
-        public static string SerializeAccountBalance(int account)
-        {
-            AccountBalance accountInfo = new AccountBalance
-            {
-                AccountId = account
-            };
-
-            XmlSerializer xml = new XmlSerializer(typeof(AccountBalance));
-            using (StringWriter stringWriter = new StringWriter())
-            {
-                xml.Serialize(stringWriter, accountInfo);
-                accountInfo.Key = GenerateKey.MD5(stringWriter.ToString());
-                StringWriter stringWriterNew = new StringWriter();
-                xml.Serialize(stringWriterNew, accountInfo);
-                return stringWriterNew.ToString();
-            };
         }
 
         public static string SerializeCcPinNumberResponse(int account, int response)
@@ -81,6 +64,24 @@ namespace Blackbox.Client.src
             {
                 xml.Serialize(stringWriter, ccPinNumberResponse);
                 return stringWriter.ToString();
+            };
+        }
+
+        public static string SerializeAccountBalance(int account)
+        {
+            AccountBalance accountInfo = new AccountBalance
+            {
+                AccountId = account
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(AccountBalance));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
+                accountInfo.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, accountInfo);
+                return stringWriterNew.ToString();
             };
         }
 
@@ -128,6 +129,33 @@ namespace Blackbox.Client.src
             };
         }
 
+        internal static DepositResponse DeserializeDepositResponse(string accountInfo)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(DepositResponse));
+            using (StringReader stringReader = new StringReader(accountInfo))
+            {
+                return (DepositResponse)xml.Deserialize(stringReader);
+            }
+        }
+
+        internal static string SerializeDepositResponse(int accountId, double newBalance, string accountTypeName, int response)
+        {
+            DepositResponse accountInfo = new DepositResponse
+            {
+                AccountId = accountId,
+                NewBalance = newBalance,
+                AccountTypeName = accountTypeName,
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(DepositResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
+                return stringWriter.ToString();
+            };
+        }
+
         public static CcPinNumberResponse DeserializeCcPinNumberResponse(string accountInfo)
         {
             XmlSerializer xml = new XmlSerializer(typeof(CcPinNumberResponse));
@@ -163,6 +191,25 @@ namespace Blackbox.Client.src
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(Withdraw));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, accountInfo);
+                accountInfo.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, accountInfo);
+                return stringWriterNew.ToString();
+            };
+        }
+
+        internal static string SerializeDeposit(int accountId, double amount)
+        {
+            Deposit accountInfo = new Deposit
+            {
+                AccountId = accountId,
+                Amount = amount
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(Deposit));
             using (StringWriter stringWriter = new StringWriter())
             {
                 xml.Serialize(stringWriter, accountInfo);
