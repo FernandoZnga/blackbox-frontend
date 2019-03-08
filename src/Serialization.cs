@@ -2,25 +2,25 @@ using System.Xml.Serialization;
 using System.IO;
 using Blackbox.Client.Domain;
 using Blackbox.Client.Prop;
-using System;
 
 namespace Blackbox.Client.src
 {
     public class Serialization
     {
+        public static string atmId = "ATM-0001";
+
         public static string SerializeGeneralResponse(int response)
         {
             GeneralResponse generalResponse = new GeneralResponse
             {
                 Response = response
             };
-
             XmlSerializer xml = new XmlSerializer(typeof(GeneralResponse));
             using (StringWriter stringWriter = new StringWriter())
             {
                 xml.Serialize(stringWriter, generalResponse);
                 return stringWriter.ToString();
-            };
+            }
         }
 
         public static string SerializeCcPinNumber(string ccNumber, string pinNumber)
@@ -28,7 +28,8 @@ namespace Blackbox.Client.src
             CcPinNumber CardInfo = new CcPinNumber
             {
                 CcNumber = ccNumber,
-                PinNumber = pinNumber
+                PinNumber = pinNumber,
+                AtmId = atmId
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(CcPinNumber));
@@ -71,7 +72,8 @@ namespace Blackbox.Client.src
         {
             AccountBalance accountInfo = new AccountBalance
             {
-                AccountId = account
+                AccountId = account,
+                AtmId = atmId
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(AccountBalance));
@@ -192,6 +194,7 @@ namespace Blackbox.Client.src
                 return (CcPinNumberResponse)(xml.Deserialize(stringReader));
             }
         }
+
         public static AccountBalanceResponse DeserializeAccountBalanceResponse(string accountInfo)
         {
             XmlSerializer xml = new XmlSerializer(typeof(AccountBalanceResponse));
@@ -200,6 +203,7 @@ namespace Blackbox.Client.src
                 return (AccountBalanceResponse)(xml.Deserialize(stringReader));
             }
         }
+
         public static GeneralResponse DeserializeGeneralResponse(string response)
         {
             XmlSerializer xml = new XmlSerializer(typeof(GeneralResponse));
@@ -215,7 +219,8 @@ namespace Blackbox.Client.src
             Withdraw accountInfo = new Withdraw
             {
                 AccountId = accountId,
-                Amount = amount
+                Amount = amount,
+                AtmId = atmId
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(Withdraw));
@@ -234,7 +239,8 @@ namespace Blackbox.Client.src
             Deposit accountInfo = new Deposit
             {
                 AccountId = accountId,
-                Amount = amount
+                Amount = amount,
+                AtmId = atmId
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(Deposit));
@@ -254,7 +260,8 @@ namespace Blackbox.Client.src
             {
                 AccountId = accountId,
                 Amount = transferAmount,
-                AccountIdDestiny = transferAccount
+                AccountIdDestiny = transferAccount,
+                AtmId = atmId
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(Transfer));
