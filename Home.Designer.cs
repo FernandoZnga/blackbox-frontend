@@ -274,12 +274,12 @@
             // Header1
             // 
             this.Header1.AutoSize = true;
-            this.Header1.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Header1.Location = new System.Drawing.Point(146, 26);
+            this.Header1.Font = new System.Drawing.Font("Segoe UI Emoji", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Header1.Location = new System.Drawing.Point(117, 17);
             this.Header1.Name = "Header1";
-            this.Header1.Size = new System.Drawing.Size(16, 14);
+            this.Header1.Size = new System.Drawing.Size(98, 26);
             this.Header1.TabIndex = 19;
-            this.Header1.Text = "...";
+            this.Header1.Text = "Welcome";
             this.Header1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ScreenText

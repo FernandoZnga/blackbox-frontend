@@ -318,11 +318,13 @@ namespace Blackbox.Client
             {
                 StartClient(Serialization.SerializeWithdraw(Account, 
                     Convert.ToDouble(withdrawAmount)));
+                Reset();
             }
             else if (depositAmount.Length > 0)
             {
                 StartClient(Serialization.SerializeDeposit(Account, 
                     Convert.ToDouble(depositAmount)));
+                Reset();
             }
             else if (transferAmount.Length == 0)
             {
@@ -336,8 +338,17 @@ namespace Blackbox.Client
             }
             else if (action == "TransferAccount" && transferAccount.Length > 0)
             {
-                StartClient(Serialization.SerializeTransfer(Account, 
+                if (Convert.ToInt32(transferAccount) != Account)
+                {
+                    StartClient(Serialization.SerializeTransfer(Account,
                     Convert.ToDouble(transferAmount), Convert.ToInt32(transferAccount)));
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("Error - Account Destiny cannot be Your own Account");
+                    Reset();
+                }
             }
             else
             {
