@@ -6,13 +6,20 @@ namespace Blackbox.Client.Domain
     public class AccountBalance
     {
         public int AccountId { get; set; }
+        public string AtmId { get; set; }
         public string Key { get; set; }
 
         public AccountBalance() { }
-        public AccountBalance(int accountId) => AccountId = accountId;
-        public AccountBalance(int accountId, string key)
+        public AccountBalance(int accountId, string atmId)
         {
             AccountId = accountId;
+            AtmId = atmId;
+        }
+
+        public AccountBalance(int accountId, string atmId, string key)
+        {
+            AccountId = accountId;
+            AtmId = atmId;
             Key = key;
         }
     }
