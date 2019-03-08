@@ -3,22 +3,24 @@
 namespace Blackbox.Client.Domain
 {
     [Serializable()]
-    public class AccountBalance
+    public class Withdraw
     {
         public int AccountId { get; set; }
+        public double Amount { get; set; }
         public string AtmId { get; set; }
         public string Key { get; set; }
 
-        public AccountBalance() { }
-        public AccountBalance(int accountId, string atmId)
+        public Withdraw() { }
+        public Withdraw(int accountId, double amount, string atmId)
         {
             AccountId = accountId;
+            Amount = amount;
             AtmId = atmId;
         }
-
-        public AccountBalance(int accountId, string atmId, string key)
+        public Withdraw(int accountId, double amount, string atmId, string key)
         {
             AccountId = accountId;
+            Amount = amount;
             AtmId = atmId;
             Key = key;
         }

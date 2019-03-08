@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Blackbox.Server
+namespace Blackbox.Client
 {
     static class Program
     {
@@ -14,7 +14,6 @@ namespace Blackbox.Server
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
-            //SocketConn.SynchronousSocketClient.StartClient();
         }
     }
 }

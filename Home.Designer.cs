@@ -1,4 +1,4 @@
-﻿namespace Blackbox.Server
+﻿namespace Blackbox.Client
 {
     partial class Home
     {
@@ -42,13 +42,14 @@
             this.Four = new System.Windows.Forms.Button();
             this.Two = new System.Windows.Forms.Button();
             this.One = new System.Windows.Forms.Button();
-            this.ScreenText = new System.Windows.Forms.TextBox();
             this.Withdraw = new System.Windows.Forms.Button();
             this.Balance = new System.Windows.Forms.Button();
-            this.Other = new System.Windows.Forms.Button();
+            this.Deposit = new System.Windows.Forms.Button();
             this.Transfer = new System.Windows.Forms.Button();
             this.PayService = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.Header1 = new System.Windows.Forms.Label();
+            this.ScreenText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Nine
@@ -60,6 +61,7 @@
             this.Nine.TabIndex = 3;
             this.Nine.Text = "9";
             this.Nine.UseVisualStyleBackColor = true;
+            this.Nine.Click += new System.EventHandler(this.Nine_Click);
             // 
             // Zero
             // 
@@ -70,6 +72,7 @@
             this.Zero.TabIndex = 4;
             this.Zero.Text = "0";
             this.Zero.UseVisualStyleBackColor = true;
+            this.Zero.Click += new System.EventHandler(this.Zero_Click);
             // 
             // Eight
             // 
@@ -80,6 +83,7 @@
             this.Eight.TabIndex = 5;
             this.Eight.Text = "8";
             this.Eight.UseVisualStyleBackColor = true;
+            this.Eight.Click += new System.EventHandler(this.Eight_Click);
             // 
             // Six
             // 
@@ -90,6 +94,7 @@
             this.Six.TabIndex = 6;
             this.Six.Text = "6";
             this.Six.UseVisualStyleBackColor = true;
+            this.Six.Click += new System.EventHandler(this.Six_Click);
             // 
             // Five
             // 
@@ -100,6 +105,7 @@
             this.Five.TabIndex = 7;
             this.Five.Text = "5";
             this.Five.UseVisualStyleBackColor = true;
+            this.Five.Click += new System.EventHandler(this.Five_Click);
             // 
             // Seven
             // 
@@ -110,6 +116,7 @@
             this.Seven.TabIndex = 8;
             this.Seven.Text = "7";
             this.Seven.UseVisualStyleBackColor = true;
+            this.Seven.Click += new System.EventHandler(this.Seven_Click);
             // 
             // EnterBtn
             // 
@@ -121,6 +128,7 @@
             this.EnterBtn.TabIndex = 9;
             this.EnterBtn.Text = "Enter";
             this.EnterBtn.UseVisualStyleBackColor = false;
+            this.EnterBtn.Click += new System.EventHandler(this.EnterBtn_Click);
             // 
             // OptionBtn
             // 
@@ -164,6 +172,7 @@
             this.Three.TabIndex = 13;
             this.Three.Text = "3";
             this.Three.UseVisualStyleBackColor = true;
+            this.Three.Click += new System.EventHandler(this.Three_Click);
             // 
             // Four
             // 
@@ -174,6 +183,7 @@
             this.Four.TabIndex = 14;
             this.Four.Text = "4";
             this.Four.UseVisualStyleBackColor = true;
+            this.Four.Click += new System.EventHandler(this.Four_Click);
             // 
             // Two
             // 
@@ -184,6 +194,7 @@
             this.Two.TabIndex = 15;
             this.Two.Text = "2";
             this.Two.UseVisualStyleBackColor = true;
+            this.Two.Click += new System.EventHandler(this.Two_Click);
             // 
             // One
             // 
@@ -194,22 +205,7 @@
             this.One.TabIndex = 16;
             this.One.Text = "1";
             this.One.UseVisualStyleBackColor = true;
-            // 
-            // ScreenText
-            // 
-            this.ScreenText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScreenText.BackColor = System.Drawing.SystemColors.Window;
-            this.ScreenText.Enabled = false;
-            this.ScreenText.Font = new System.Drawing.Font("Segoe UI Emoji", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScreenText.ForeColor = System.Drawing.Color.Black;
-            this.ScreenText.Location = new System.Drawing.Point(100, 25);
-            this.ScreenText.Multiline = true;
-            this.ScreenText.Name = "ScreenText";
-            this.ScreenText.Size = new System.Drawing.Size(134, 120);
-            this.ScreenText.TabIndex = 17;
-            this.ScreenText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.One.Click += new System.EventHandler(this.One_Click);
             // 
             // Withdraw
             // 
@@ -220,6 +216,7 @@
             this.Withdraw.TabIndex = 18;
             this.Withdraw.Text = "Withdraw";
             this.Withdraw.UseVisualStyleBackColor = true;
+            this.Withdraw.Click += new System.EventHandler(this.Withdraw_Click);
             // 
             // Balance
             // 
@@ -232,14 +229,16 @@
             this.Balance.UseVisualStyleBackColor = true;
             this.Balance.Click += new System.EventHandler(this.Balance_Click);
             // 
-            // Other
+            // Deposit
             // 
-            this.Other.Font = new System.Drawing.Font("Segoe UI Emoji", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Other.Location = new System.Drawing.Point(29, 104);
-            this.Other.Name = "Other";
-            this.Other.Size = new System.Drawing.Size(65, 40);
-            this.Other.TabIndex = 18;
-            this.Other.UseVisualStyleBackColor = true;
+            this.Deposit.Font = new System.Drawing.Font("Segoe UI Emoji", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Deposit.Location = new System.Drawing.Point(29, 104);
+            this.Deposit.Name = "Deposit";
+            this.Deposit.Size = new System.Drawing.Size(65, 40);
+            this.Deposit.TabIndex = 18;
+            this.Deposit.Text = "Deposit";
+            this.Deposit.UseVisualStyleBackColor = true;
+            this.Deposit.Click += new System.EventHandler(this.Deposit_Click);
             // 
             // Transfer
             // 
@@ -250,6 +249,7 @@
             this.Transfer.TabIndex = 18;
             this.Transfer.Text = "Transfer";
             this.Transfer.UseVisualStyleBackColor = true;
+            this.Transfer.Click += new System.EventHandler(this.Transfer_Click);
             // 
             // PayService
             // 
@@ -271,18 +271,40 @@
             this.button6.Text = "Back";
             this.button6.UseVisualStyleBackColor = true;
             // 
+            // Header1
+            // 
+            this.Header1.AutoSize = true;
+            this.Header1.Font = new System.Drawing.Font("Segoe UI Emoji", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Header1.Location = new System.Drawing.Point(117, 17);
+            this.Header1.Name = "Header1";
+            this.Header1.Size = new System.Drawing.Size(98, 26);
+            this.Header1.TabIndex = 19;
+            this.Header1.Text = "Welcome";
+            this.Header1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ScreenText
+            // 
+            this.ScreenText.Enabled = false;
+            this.ScreenText.Location = new System.Drawing.Point(100, 46);
+            this.ScreenText.Multiline = true;
+            this.ScreenText.Name = "ScreenText";
+            this.ScreenText.Size = new System.Drawing.Size(134, 98);
+            this.ScreenText.TabIndex = 20;
+            this.ScreenText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 411);
+            this.Controls.Add(this.ScreenText);
+            this.Controls.Add(this.Header1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.PayService);
-            this.Controls.Add(this.Other);
+            this.Controls.Add(this.Deposit);
             this.Controls.Add(this.Transfer);
             this.Controls.Add(this.Balance);
             this.Controls.Add(this.Withdraw);
-            this.Controls.Add(this.ScreenText);
             this.Controls.Add(this.Nine);
             this.Controls.Add(this.Zero);
             this.Controls.Add(this.Eight);
@@ -321,12 +343,13 @@
         private System.Windows.Forms.Button Four;
         private System.Windows.Forms.Button Two;
         private System.Windows.Forms.Button One;
-        public  System.Windows.Forms.TextBox ScreenText;
         private System.Windows.Forms.Button Withdraw;
         private System.Windows.Forms.Button Balance;
-        private System.Windows.Forms.Button Other;
+        private System.Windows.Forms.Button Deposit;
         private System.Windows.Forms.Button Transfer;
         private System.Windows.Forms.Button PayService;
         private System.Windows.Forms.Button button6;
+        public System.Windows.Forms.Label Header1;
+        public System.Windows.Forms.TextBox ScreenText;
     }
 }

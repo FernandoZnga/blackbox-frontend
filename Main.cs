@@ -1,8 +1,10 @@
-﻿using Blackbox.Server.Prop;
+﻿using Blackbox.Client.Prop;
+using Blackbox.Client.src;
 using System;
 using System.Windows.Forms;
+using static Blackbox.Client.src.SocketConn.SynchronousSocketClient;
 
-namespace Blackbox.Server
+namespace Blackbox.Client
 {
     public partial class Main : Form
     {
@@ -10,12 +12,23 @@ namespace Blackbox.Server
         {
             InitializeComponent();
             PinNumberLabel.Visible = false;
+            PinNumber.Clear();
             PinNumber.Visible = false;
+            CcNumber.Clear();
+            CcNumber.Visible = true;
         }
 
         public static void ShowInvalidCcPinNumberMessage()
         {
             MessageBox.Show("Invalida Credit Card or Pin number.");
+        }
+
+        public static void ShowInvalidTokenMessage()
+        {
+            MessageBox.Show("String violation. No transaction performed.");
+            ActiveForm.Hide();
+            Main main = new Main();
+            main.ShowDialog();
         }
 
         public static void ShowHome(CcPinNumberResponse ccPinNumberResponse)
@@ -33,11 +46,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-1");
+                        CcNumber.AppendText("-" + One.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("1");
+                        CcNumber.AppendText(One.Text);
                     }
                 }
             }
@@ -45,7 +58,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("1");
+                    PinNumber.AppendText(One.Text);
                 }
             }
         }
@@ -58,11 +71,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-2");
+                        CcNumber.AppendText("-" + Two.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("2");
+                        CcNumber.AppendText(Two.Text);
                     }
                 }
             }
@@ -70,7 +83,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("2");
+                    PinNumber.AppendText(Two.Text);
                 }
             }
         }
@@ -83,11 +96,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-3");
+                        CcNumber.AppendText("-" + Three.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("3");
+                        CcNumber.AppendText(Three.Text);
                     }
                 }
             }
@@ -95,7 +108,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("3");
+                    PinNumber.AppendText(Three.Text);
                 }
             }
         }
@@ -108,11 +121,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-4");
+                        CcNumber.AppendText("-" + Four.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("4");
+                        CcNumber.AppendText(Four.Text);
                     }
                 }
             }
@@ -120,7 +133,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("4");
+                    PinNumber.AppendText(Four.Text);
                 }
             }
         }
@@ -133,11 +146,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-5");
+                        CcNumber.AppendText("-" + Five.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("5");
+                        CcNumber.AppendText(Five.Text);
                     }
                 }
             }
@@ -145,7 +158,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("5");
+                    PinNumber.AppendText(Five.Text);
                 }
             }
         }
@@ -158,11 +171,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-6");
+                        CcNumber.AppendText("-" + Six.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("6");
+                        CcNumber.AppendText(Six.Text);
                     }
                 }
             }
@@ -170,7 +183,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("6");
+                    PinNumber.AppendText(Six.Text);
                 }
             }
         }
@@ -183,11 +196,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-7");
+                        CcNumber.AppendText("-" + Seven.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("7");
+                        CcNumber.AppendText(Seven.Text);
                     }
                 }
             }
@@ -195,7 +208,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("7");
+                    PinNumber.AppendText(Seven.Text);
                 }
             }
         }
@@ -208,11 +221,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-8");
+                        CcNumber.AppendText("-" + Eight.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("8");
+                        CcNumber.AppendText(Eight.Text);
                     }
                 }
             }
@@ -220,7 +233,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("8");
+                    PinNumber.AppendText(Eight.Text);
                 }
             }
         }
@@ -233,11 +246,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-9");
+                        CcNumber.AppendText("-" + Nine.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("9");
+                        CcNumber.AppendText(Nine.Text);
                     }
                 }
             }
@@ -245,7 +258,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("9");
+                    PinNumber.AppendText(Nine.Text);
                 }
             }
         }
@@ -258,11 +271,11 @@ namespace Blackbox.Server
                 {
                     if (CcNumber.TextLength == 4 || CcNumber.TextLength == 9 || CcNumber.TextLength == 14)
                     {
-                        CcNumber.AppendText("-0");
+                        CcNumber.AppendText("-" + Zero.Text);
                     }
                     else
                     {
-                        CcNumber.AppendText("0");
+                        CcNumber.AppendText(Zero.Text);
                     }
                 }
             }
@@ -270,7 +283,7 @@ namespace Blackbox.Server
             {
                 if (PinNumber.TextLength < 4)
                 {
-                    PinNumber.AppendText("0");
+                    PinNumber.AppendText(Zero.Text);
                 }
             }
         }
@@ -331,8 +344,7 @@ namespace Blackbox.Server
                 }
                 else
                 {
-                    //Serialization.SerializeCcPinNumber(CcNumber.Text, PinNumber.Text);
-                    SocketConn.SynchronousSocketClient.StartClient(Serialization.SerializeCcPinNumber(CcNumber.Text, PinNumber.Text));
+                    StartClient(Serialization.SerializeCcPinNumber(CcNumber.Text, PinNumber.Text));
                 }
             }
         }
