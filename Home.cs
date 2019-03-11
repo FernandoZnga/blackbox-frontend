@@ -13,6 +13,10 @@ namespace Blackbox.Client
         public string transferAmount = string.Empty;
         public string transferAccount = string.Empty;
         public string depositAmount = string.Empty;
+        public string currentPin = string.Empty;
+        public string newPin = string.Empty;
+        public string confirmPin = string.Empty;
+
         public int Account;
 
         public Home(int accountId)
@@ -94,6 +98,21 @@ namespace Blackbox.Client
                 transferAccount += One.Text;
                 ScreenText.AppendText(One.Text);
             }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
         }
 
         private void Two_Click(object sender, EventArgs e)
@@ -116,6 +135,21 @@ namespace Blackbox.Client
             else if (action == "TransferAccount")
             {
                 transferAccount += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
         }
@@ -142,6 +176,21 @@ namespace Blackbox.Client
                 transferAccount += Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
         }
 
         private void Four_Click(object sender, EventArgs e)
@@ -164,6 +213,21 @@ namespace Blackbox.Client
             else if (action == "TransferAccount")
             {
                 transferAccount += Four.Text;
+                ScreenText.AppendText(Four.Text);
+            }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Four.Text;
+                ScreenText.AppendText(Four.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Four.Text;
+                ScreenText.AppendText(Four.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Four.Text;
                 ScreenText.AppendText(Four.Text);
             }
         }
@@ -190,6 +254,21 @@ namespace Blackbox.Client
                 transferAccount += Five.Text;
                 ScreenText.AppendText(Five.Text);
             }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Five.Text;
+                ScreenText.AppendText(Five.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Five.Text;
+                ScreenText.AppendText(Five.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Five.Text;
+                ScreenText.AppendText(Five.Text);
+            }
         }
 
         private void Six_Click(object sender, EventArgs e)
@@ -212,6 +291,21 @@ namespace Blackbox.Client
             else if (action == "TransferAccount")
             {
                 transferAccount += Six.Text;
+                ScreenText.AppendText(Six.Text);
+            }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Six.Text;
+                ScreenText.AppendText(Six.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Six.Text;
+                ScreenText.AppendText(Six.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
         }
@@ -238,6 +332,21 @@ namespace Blackbox.Client
                 transferAccount += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
             }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Seven.Text;
+                ScreenText.AppendText(Seven.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Seven.Text;
+                ScreenText.AppendText(Seven.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Seven.Text;
+                ScreenText.AppendText(Seven.Text);
+            }
         }
 
         private void Eight_Click(object sender, EventArgs e)
@@ -260,6 +369,21 @@ namespace Blackbox.Client
             else if (action == "TransferAccount")
             {
                 transferAccount += Eight.Text;
+                ScreenText.AppendText(Eight.Text);
+            }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Eight.Text;
+                ScreenText.AppendText(Eight.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Eight.Text;
+                ScreenText.AppendText(Eight.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
             }
         }
@@ -286,6 +410,21 @@ namespace Blackbox.Client
                 transferAccount += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
             }
+            else if (action == "ChangeMyPin")
+            {
+                currentPin += Nine.Text;
+                ScreenText.AppendText(Nine.Text);
+            }
+            else if (action == "ChangeMyPinNew")
+            {
+                newPin += Nine.Text;
+                ScreenText.AppendText(Nine.Text);
+            }
+            else if (action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Nine.Text;
+                ScreenText.AppendText(Nine.Text);
+            }
         }
 
         private void Zero_Click(object sender, EventArgs e)
@@ -308,6 +447,21 @@ namespace Blackbox.Client
             else if (transferAccount.Length > 0 && action == "TransferAcount")
             {
                 transferAccount += Zero.Text;
+                ScreenText.AppendText(Zero.Text);
+            }
+            else if (currentPin.Length > 0 && action == "ChangeMyPin")
+            {
+                currentPin += Zero.Text;
+                ScreenText.AppendText(Zero.Text);
+            }
+            else if (newPin.Length > 0 && action == "ChangeMyPinNew")
+            {
+                newPin += Zero.Text;
+                ScreenText.AppendText(Zero.Text);
+            }
+            else if (confirmPin.Length > 0 && action == "ChangeMyPinConfirm")
+            {
+                confirmPin += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
             }
         }
@@ -350,9 +504,32 @@ namespace Blackbox.Client
                     Reset();
                 }
             }
+            else if (action == "ChangeMyPin" && currentPin.Length > 0)
+            {
+                action = "ChangeMyPinNew";
+                ScreenText.AppendText("Enter your new Pin" + Environment.NewLine + "--> ");
+            }
+            else if (action == "ChangeMyPinNew" && newPin.Length > 0)
+            {
+                action = "ChangeMyPinConfirm";
+                ScreenText.AppendText("Confirm you new Pin" + Environment.NewLine + "--> ");
+            }
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length > 0)
+            {
+                if (newPin != confirmPin || newPin == currentPin)
+                {
+                    MessageBox.Show("Error - New and Confirm must be the same to continue and Current and New must be differente");
+                    Reset();
+                }
+                else
+                {
+                    StartClient(Serialization.SerializeChangePin(Account, currentPin, newPin));
+                    Reset();
+                }
+            }
             else
             {
-                MessageBox.Show("Enter a valid amount to continue");
+                MessageBox.Show("Enter a value to continue");
             }
         }
 
@@ -417,6 +594,28 @@ namespace Blackbox.Client
             MessageBox.Show("Account type: " + transfer.AccountTypeName +
                 Environment.NewLine + "Transfer to the account " + transfer.AccountIdDestiny + " Done!" +
                 Environment.NewLine + "Your New Balance is $" + transfer.NewBalance);
+            //Reset();
+        }
+
+        private void ChangeMyPin_Click(object sender, EventArgs e)
+        {
+            Reset();
+            action = "ChangeMyPin";
+            ScreenText.Text = "Enter your Current Pin" + Environment.NewLine + "-->");
+        }
+
+
+        internal static void ChangePinResult(ChangePinResponse changePin)
+        {
+            Home home = new Home(changePin.AccountId);
+            home.ShowChangePin(changePin);
+            home.Reset();
+        }
+
+        private void ShowChangePin(ChangePinResponse changePin)
+        {
+            ScreenText.Text = "";
+            MessageBox.Show("Pin Changed Successfully");
             //Reset();
         }
     }

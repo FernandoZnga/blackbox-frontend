@@ -35,7 +35,7 @@
             this.Five = new System.Windows.Forms.Button();
             this.Seven = new System.Windows.Forms.Button();
             this.EnterBtn = new System.Windows.Forms.Button();
-            this.OptionBtn = new System.Windows.Forms.Button();
+            this.ChangeMyPin = new System.Windows.Forms.Button();
             this.ClearBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.Three = new System.Windows.Forms.Button();
@@ -130,15 +130,16 @@
             this.EnterBtn.UseVisualStyleBackColor = false;
             this.EnterBtn.Click += new System.EventHandler(this.EnterBtn_Click);
             // 
-            // OptionBtn
+            // ChangeMyPin
             // 
-            this.OptionBtn.Font = new System.Drawing.Font("Segoe UI Emoji", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OptionBtn.Location = new System.Drawing.Point(196, 285);
-            this.OptionBtn.Name = "OptionBtn";
-            this.OptionBtn.Size = new System.Drawing.Size(110, 50);
-            this.OptionBtn.TabIndex = 10;
-            this.OptionBtn.Text = "_";
-            this.OptionBtn.UseVisualStyleBackColor = true;
+            this.ChangeMyPin.Font = new System.Drawing.Font("Segoe UI Emoji", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeMyPin.Location = new System.Drawing.Point(196, 285);
+            this.ChangeMyPin.Name = "ChangeMyPin";
+            this.ChangeMyPin.Size = new System.Drawing.Size(110, 50);
+            this.ChangeMyPin.TabIndex = 10;
+            this.ChangeMyPin.Text = "Change My Pin";
+            this.ChangeMyPin.UseVisualStyleBackColor = true;
+            this.ChangeMyPin.Click += new System.EventHandler(this.ChangeMyPin_Click);
             // 
             // ClearBtn
             // 
@@ -290,7 +291,6 @@
             this.ScreenText.Name = "ScreenText";
             this.ScreenText.Size = new System.Drawing.Size(134, 98);
             this.ScreenText.TabIndex = 20;
-            this.ScreenText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Home
             // 
@@ -312,7 +312,7 @@
             this.Controls.Add(this.Five);
             this.Controls.Add(this.Seven);
             this.Controls.Add(this.EnterBtn);
-            this.Controls.Add(this.OptionBtn);
+            this.Controls.Add(this.ChangeMyPin);
             this.Controls.Add(this.ClearBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.Three);
@@ -336,7 +336,7 @@
         private System.Windows.Forms.Button Five;
         private System.Windows.Forms.Button Seven;
         private System.Windows.Forms.Button EnterBtn;
-        private System.Windows.Forms.Button OptionBtn;
+        private System.Windows.Forms.Button ChangeMyPin;
         private System.Windows.Forms.Button ClearBtn;
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Button Three;

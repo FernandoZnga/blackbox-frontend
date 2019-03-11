@@ -2,6 +2,7 @@ using System.Xml.Serialization;
 using System.IO;
 using Blackbox.Client.Domain;
 using Blackbox.Client.Prop;
+using System;
 
 namespace Blackbox.Client.src
 {
@@ -186,6 +187,31 @@ namespace Blackbox.Client.src
             };
         }
 
+        internal static string SerializeChangePinResponse(int accountId, int response)
+        {
+            ChangePinResponse changePinResponse = new ChangePinResponse
+            {
+                AccountId = accountId,
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(ChangePinResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, changePinResponse);
+                return stringWriter.ToString();
+            };
+        }
+
+        internal static ChangePinResponse DeserializeChangePinResponse(string xmlText)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(ChangePinResponse));
+            using (StringReader stringReader = new StringReader(xmlText))
+            {
+                return (ChangePinResponse)(xml.Deserialize(stringReader));
+            }
+        }
+
         public static CcPinNumberResponse DeserializeCcPinNumberResponse(string accountInfo)
         {
             XmlSerializer xml = new XmlSerializer(typeof(CcPinNumberResponse));
@@ -271,6 +297,27 @@ namespace Blackbox.Client.src
                 accountInfo.Key = GenerateKey.MD5(stringWriter.ToString());
                 StringWriter stringWriterNew = new StringWriter();
                 xml.Serialize(stringWriterNew, accountInfo);
+                return stringWriterNew.ToString();
+            };
+        }
+
+        internal static string SerializeChangePin(int account, string currentPin, string newPin)
+        {
+            ChangePin changePin = new ChangePin
+            {
+                Account = account,
+                CurrentPin = currentPin,
+                NewPin = newPin,
+                AtmId = atmId
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(ChangePin));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, changePin);
+                changePin.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, changePin);
                 return stringWriterNew.ToString();
             };
         }
