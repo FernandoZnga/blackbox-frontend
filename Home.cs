@@ -27,6 +27,7 @@ namespace Blackbox.Client
 
         private void Balance_Click(object sender, EventArgs e)
         {
+            Reset();
             StartClient(Serialization.SerializeAccountBalance(Account));
         }
         internal static void ShowAccountBalance(AccountBalanceResponse accountBalance)
@@ -59,11 +60,15 @@ namespace Blackbox.Client
             transferAmount = string.Empty;
             withdrawAmount = string.Empty;
             depositAmount = string.Empty;
+            currentPin = string.Empty;
+            newPin = string.Empty;
+            confirmPin = string.Empty;
             action = string.Empty;
         }
 
         private void Withdraw_Click(object sender, EventArgs e)
         {
+            Reset();
             action = Withdraw.Text;
             withdrawAmount = "";
             ScreenText.Clear();
@@ -98,17 +103,17 @@ namespace Blackbox.Client
                 transferAccount += One.Text;
                 ScreenText.AppendText(One.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += One.Text;
                 ScreenText.AppendText(One.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += One.Text;
                 ScreenText.AppendText(One.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += One.Text;
                 ScreenText.AppendText(One.Text);
@@ -137,17 +142,17 @@ namespace Blackbox.Client
                 transferAccount += Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Two.Text;
                 ScreenText.AppendText(Two.Text);
@@ -176,17 +181,17 @@ namespace Blackbox.Client
                 transferAccount += Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Three.Text;
                 ScreenText.AppendText(Three.Text);
@@ -215,17 +220,17 @@ namespace Blackbox.Client
                 transferAccount += Four.Text;
                 ScreenText.AppendText(Four.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Four.Text;
                 ScreenText.AppendText(Four.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Four.Text;
                 ScreenText.AppendText(Four.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Four.Text;
                 ScreenText.AppendText(Four.Text);
@@ -254,17 +259,17 @@ namespace Blackbox.Client
                 transferAccount += Five.Text;
                 ScreenText.AppendText(Five.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Five.Text;
                 ScreenText.AppendText(Five.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Five.Text;
                 ScreenText.AppendText(Five.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Five.Text;
                 ScreenText.AppendText(Five.Text);
@@ -293,17 +298,17 @@ namespace Blackbox.Client
                 transferAccount += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Six.Text;
                 ScreenText.AppendText(Six.Text);
@@ -332,17 +337,17 @@ namespace Blackbox.Client
                 transferAccount += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
@@ -371,17 +376,17 @@ namespace Blackbox.Client
                 transferAccount += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
@@ -410,17 +415,17 @@ namespace Blackbox.Client
                 transferAccount += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
             }
-            else if (action == "ChangeMyPin")
+            else if (action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
             }
-            else if (action == "ChangeMyPinNew")
+            else if (action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
             }
-            else if (action == "ChangeMyPinConfirm")
+            else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
@@ -449,17 +454,17 @@ namespace Blackbox.Client
                 transferAccount += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
             }
-            else if (currentPin.Length > 0 && action == "ChangeMyPin")
+            else if (currentPin.Length > 0 && action == "ChangeMyPin" && currentPin.Length < 4)
             {
                 currentPin += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
             }
-            else if (newPin.Length > 0 && action == "ChangeMyPinNew")
+            else if (newPin.Length > 0 && action == "ChangeMyPinNew" && newPin.Length < 4)
             {
                 newPin += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
             }
-            else if (confirmPin.Length > 0 && action == "ChangeMyPinConfirm")
+            else if (confirmPin.Length > 0 && action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
@@ -468,23 +473,24 @@ namespace Blackbox.Client
 
         private void EnterBtn_Click(object sender, EventArgs e)
         {
-            if (withdrawAmount.Length > 0)
+            if (action == "Withdraw" && withdrawAmount.Length > 0)
             {
                 StartClient(Serialization.SerializeWithdraw(Account, 
                     Convert.ToDouble(withdrawAmount)));
                 Reset();
             }
-            else if (depositAmount.Length > 0)
+            else if (action == "Deposit" && depositAmount.Length > 0)
             {
                 StartClient(Serialization.SerializeDeposit(Account, 
                     Convert.ToDouble(depositAmount)));
                 Reset();
             }
-            else if (transferAmount.Length == 0)
+            else if (action == "Transfer" && transferAmount.Length == 0)
             {
                 MessageBox.Show("Enter Amount to continue");
             }
-            else if (transferAmount.Length > 0 && transferAccount.Length == 0)
+            else if (action == "Transfer" && 
+                transferAmount.Length > 0 && transferAccount.Length == 0)
             {
                 action = "TransferAccount";
                 ScreenText.AppendText(Environment.NewLine + "Enter Account Number" + 
@@ -507,11 +513,13 @@ namespace Blackbox.Client
             else if (action == "ChangeMyPin" && currentPin.Length > 0)
             {
                 action = "ChangeMyPinNew";
+                ScreenText.AppendText(Environment.NewLine);
                 ScreenText.AppendText("Enter your new Pin" + Environment.NewLine + "--> ");
             }
             else if (action == "ChangeMyPinNew" && newPin.Length > 0)
             {
                 action = "ChangeMyPinConfirm";
+                ScreenText.AppendText(Environment.NewLine);
                 ScreenText.AppendText("Confirm you new Pin" + Environment.NewLine + "--> ");
             }
             else if (action == "ChangeMyPinConfirm" && confirmPin.Length > 0)
@@ -551,6 +559,7 @@ namespace Blackbox.Client
 
         private void Deposit_Click(object sender, EventArgs e)
         {
+            Reset();
             action = Deposit.Text;
             depositAmount = "";
             ScreenText.Clear();
@@ -574,6 +583,7 @@ namespace Blackbox.Client
 
         private void Transfer_Click(object sender, EventArgs e)
         {
+            Reset();
             action = Transfer.Text;
             transferAmount = "";
             transferAccount = "";
@@ -601,7 +611,7 @@ namespace Blackbox.Client
         {
             Reset();
             action = "ChangeMyPin";
-            ScreenText.Text = "Enter your Current Pin" + Environment.NewLine + "-->");
+            ScreenText.Text = "Enter your Current Pin" + Environment.NewLine + "-->";
         }
 
 
@@ -617,6 +627,11 @@ namespace Blackbox.Client
             ScreenText.Text = "";
             MessageBox.Show("Pin Changed Successfully");
             //Reset();
+        }
+
+        internal static void ShowErrorChangePin()
+        {
+            MessageBox.Show("Error Changing your Pin. No Action performed");
         }
     }
 }

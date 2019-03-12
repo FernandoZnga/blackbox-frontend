@@ -40,6 +40,10 @@ namespace Blackbox.Client.Prop
                     {
                         Home.ShowCheckAmount();
                     }
+                    else if (generalResponse.Response == 801)
+                    {
+                        Home.ShowErrorChangePin();
+                    }
                 }
                 else if (api == "CcPinNumberResponse")
                 {
