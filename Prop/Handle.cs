@@ -40,6 +40,10 @@ namespace Blackbox.Client.Prop
                     {
                         Home.ShowCheckAmount();
                     }
+                    else if (generalResponse.Response == 801)
+                    {
+                        Home.ShowErrorChangePin();
+                    }
                 }
                 else if (api == "CcPinNumberResponse")
                 {
@@ -132,6 +136,23 @@ namespace Blackbox.Client.Prop
                     else
                     {
                         Home.TransferResult(transfer);
+                    }
+                }
+                else if (api == "ChangePinResponse")
+                {
+                    var changePinResponse = Serialization.DeserializeChangePinResponse(xmlText);
+                    ChangePinResponse changePin = new ChangePinResponse
+                    {
+                        AccountId = changePinResponse.AccountId,
+                        Response = changePinResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeChangePinResponse(changePin.AccountId, changePin.Response)) != changePinResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.ChangePinResult(changePin);
                     }
                 }
             }
