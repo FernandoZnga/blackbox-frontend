@@ -261,6 +261,7 @@
             this.PayService.TabIndex = 18;
             this.PayService.Text = "Pay Service";
             this.PayService.UseVisualStyleBackColor = true;
+            this.PayService.Click += new System.EventHandler(this.PayService_Click);
             // 
             // button6
             // 

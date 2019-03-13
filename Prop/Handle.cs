@@ -44,6 +44,22 @@ namespace Blackbox.Client.Prop
                     {
                         Home.ShowErrorChangePin();
                     }
+                    else if (generalResponse.Response == 901)
+                    {
+                        Home.ShowAccountInvalid();
+                    }
+                    else if (generalResponse.Response == 902)
+                    {
+                        Home.ShowBillingIdInvalid();
+                    }
+                    else if (generalResponse.Response == 903)
+                    {
+                        Home.ShowNotEnoughBalance();
+                    }
+                    else if (generalResponse.Response == 904)
+                    {
+                        Home.ShowBillAlreadyPayed();
+                    }
                 }
                 else if (api == "CcPinNumberResponse")
                 {
@@ -153,6 +169,63 @@ namespace Blackbox.Client.Prop
                     else
                     {
                         Home.ChangePinResult(changePin);
+                    }
+                }
+                else if (api == "PayEneeResponse")
+                {
+                    var payEneeResponse = Serialization.DeserializePayEneeResponse(xmlText);
+                    PayEneeResponse payEnee = new PayEneeResponse
+                    {
+                        AccountId = payEneeResponse.AccountId,
+                        NewBalance = payEneeResponse.NewBalance,
+                        AccountTypeName = payEneeResponse.AccountTypeName,
+                        Response = payEneeResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializePayEneeResponse(payEnee.AccountId, payEnee.NewBalance, payEnee.AccountTypeName, payEnee.Response)) != payEneeResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.PayEneeResult(payEnee);
+                    }
+                }
+                else if (api == "PaySanaaResponse")
+                {
+                    var paySanaaResponse = Serialization.DeserializePaySanaaResponse(xmlText);
+                    PaySanaaResponse paySanaa = new PaySanaaResponse
+                    {
+                        AccountId = paySanaaResponse.AccountId,
+                        NewBalance = paySanaaResponse.NewBalance,
+                        AccountTypeName = paySanaaResponse.AccountTypeName,
+                        Response = paySanaaResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializePaySanaaResponse(paySanaa.AccountId, paySanaa.NewBalance, paySanaa.AccountTypeName, paySanaa.Response)) != paySanaaResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.PaySanaaResult(paySanaa);
+                    }
+                }
+                else if (api == "PayHondutelResponse")
+                {
+                    var payHondutelResponse = Serialization.DeserializePaySanaaResponse(xmlText);
+                    PayHondutelResponse payHondutel = new PayHondutelResponse
+                    {
+                        AccountId = payHondutelResponse.AccountId,
+                        NewBalance = payHondutelResponse.NewBalance,
+                        AccountTypeName = payHondutelResponse.AccountTypeName,
+                        Response = payHondutelResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializePayHondutelResponse(payHondutel.AccountId, payHondutel.NewBalance, payHondutel.AccountTypeName, payHondutel.Response)) != payHondutelResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.PayHondutelResult(payHondutel);
                     }
                 }
             }
