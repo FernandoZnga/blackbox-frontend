@@ -16,6 +16,8 @@ namespace Blackbox.Client
         public string currentPin = string.Empty;
         public string newPin = string.Empty;
         public string confirmPin = string.Empty;
+        public string serviceOption = string.Empty;
+        public string billingId = string.Empty;
 
         public int Account;
 
@@ -63,7 +65,23 @@ namespace Blackbox.Client
             currentPin = string.Empty;
             newPin = string.Empty;
             confirmPin = string.Empty;
+            serviceOption = string.Empty;
             action = string.Empty;
+        }
+
+        internal static void ShowNotEnoughBalance()
+        {
+            MessageBox.Show("You don't have enough balance to pay");
+        }
+
+        internal static void ShowBillingIdInvalid()
+        {
+            MessageBox.Show("Billing Id invalid");
+        }
+
+        internal static void ShowAccountInvalid()
+        {
+            MessageBox.Show("Account Id invalid");
         }
 
         private void Withdraw_Click(object sender, EventArgs e)
@@ -86,6 +104,11 @@ namespace Blackbox.Client
             if (action == "Withdraw")
             {
                 withdrawAmount += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
+            else if (action == "PayService" && serviceOption.Length == 0)
+            {
+                serviceOption = One.Text;
                 ScreenText.AppendText(One.Text);
             }
             else if (action == "Deposit")
@@ -118,6 +141,11 @@ namespace Blackbox.Client
                 confirmPin += One.Text;
                 ScreenText.AppendText(One.Text);
             }
+            else if (action == "BillingId")
+            {
+                billingId += One.Text;
+                ScreenText.AppendText(One.Text);
+            }
         }
 
         private void Two_Click(object sender, EventArgs e)
@@ -125,6 +153,11 @@ namespace Blackbox.Client
             if (action == "Withdraw")
             {
                 withdrawAmount += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "PayService" && serviceOption.Length == 0)
+            {
+                serviceOption = Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
             else if (action == "Deposit")
@@ -157,6 +190,11 @@ namespace Blackbox.Client
                 confirmPin += Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
+            else if (action == "BillingId")
+            {
+                billingId += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
         }
 
         private void Three_Click(object sender, EventArgs e)
@@ -164,6 +202,11 @@ namespace Blackbox.Client
             if (action == "Withdraw")
             {
                 withdrawAmount += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
+            else if (action == "PayService" && serviceOption.Length == 0)
+            {
+                serviceOption = Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
             else if (action == "Deposit")
@@ -194,6 +237,11 @@ namespace Blackbox.Client
             else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Three.Text;
+                ScreenText.AppendText(Three.Text);
+            }
+            else if (action == "BillingId")
+            {
+                billingId += Three.Text;
                 ScreenText.AppendText(Three.Text);
             }
         }
@@ -235,6 +283,11 @@ namespace Blackbox.Client
                 confirmPin += Four.Text;
                 ScreenText.AppendText(Four.Text);
             }
+            else if (action == "BillingId")
+            {
+                billingId += Four.Text;
+                ScreenText.AppendText(Four.Text);
+            }
         }
 
         private void Five_Click(object sender, EventArgs e)
@@ -272,6 +325,11 @@ namespace Blackbox.Client
             else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Five.Text;
+                ScreenText.AppendText(Five.Text);
+            }
+            else if (action == "BillingId")
+            {
+                billingId += Five.Text;
                 ScreenText.AppendText(Five.Text);
             }
         }
@@ -313,6 +371,11 @@ namespace Blackbox.Client
                 confirmPin += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
+            else if (action == "BillingId")
+            {
+                billingId += Six.Text;
+                ScreenText.AppendText(Six.Text);
+            }
         }
 
         private void Seven_Click(object sender, EventArgs e)
@@ -350,6 +413,11 @@ namespace Blackbox.Client
             else if (action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Seven.Text;
+                ScreenText.AppendText(Seven.Text);
+            }
+            else if (action == "BillingId")
+            {
+                billingId += Seven.Text;
                 ScreenText.AppendText(Seven.Text);
             }
         }
@@ -391,6 +459,11 @@ namespace Blackbox.Client
                 confirmPin += Eight.Text;
                 ScreenText.AppendText(Eight.Text);
             }
+            else if (action == "BillingId")
+            {
+                billingId += Eight.Text;
+                ScreenText.AppendText(Eight.Text);
+            }
         }
 
         private void Nine_Click(object sender, EventArgs e)
@@ -430,6 +503,11 @@ namespace Blackbox.Client
                 confirmPin += Nine.Text;
                 ScreenText.AppendText(Nine.Text);
             }
+            else if (action == "BillingId")
+            {
+                billingId += Nine.Text;
+                ScreenText.AppendText(Nine.Text);
+            }
         }
 
         private void Zero_Click(object sender, EventArgs e)
@@ -467,6 +545,11 @@ namespace Blackbox.Client
             else if (confirmPin.Length > 0 && action == "ChangeMyPinConfirm" && confirmPin.Length < 4)
             {
                 confirmPin += Zero.Text;
+                ScreenText.AppendText(Zero.Text);
+            }
+            else if (billingId.Length > 0 && action == "BillingId")
+            {
+                billingId += Zero.Text;
                 ScreenText.AppendText(Zero.Text);
             }
         }
@@ -534,6 +617,28 @@ namespace Blackbox.Client
                     StartClient(Serialization.SerializeChangePin(Account, currentPin, newPin));
                     Reset();
                 }
+            }
+            else if (serviceOption.Length == 1)
+            {
+                action = "BillingId";
+                ScreenText.AppendText(Environment.NewLine);
+                ScreenText.AppendText("Enter Bill Number" + Environment.NewLine + "--> ");
+            }
+            else if (action == "BillingId" && billingId.Length > 0)
+            {
+                if (serviceOption == "1")
+                {
+                    StartClient(Serialization.SerializePayEnee(Account, Convert.ToInt32(billingId)));
+                }
+                else if (serviceOption == "2")
+                {
+                    StartClient(Serialization.SerializePaySanaa(Account, Convert.ToInt32(billingId)));
+                }
+                else
+                {
+                    StartClient(Serialization.SerializePayHondutel(Account, Convert.ToInt32(billingId)));
+                }
+                Reset();
             }
             else
             {
@@ -632,6 +737,58 @@ namespace Blackbox.Client
         internal static void ShowErrorChangePin()
         {
             MessageBox.Show("Error Changing your Pin. No Action performed");
+        }
+
+        private void PayService_Click(object sender, EventArgs e)
+        {
+            Reset();
+            action = "PayService";
+            ScreenText.Text = "Select an option" + Environment.NewLine;
+            ScreenText.AppendText("1 - Enee" + Environment.NewLine);
+            ScreenText.AppendText("2 - Sanaa" + Environment.NewLine);
+            ScreenText.AppendText("3 - Hondutel" + Environment.NewLine + "--> ");
+        }
+
+        internal static void PayEneeResult(PayEneeResponse payEnee)
+        {
+            Home home = new Home(payEnee.AccountId);
+            home.ShowPayEnee(payEnee);
+            home.Reset();
+        }
+
+        private void ShowPayEnee(PayEneeResponse payEnee)
+        {
+            ScreenText.Text = "";
+            MessageBox.Show("Bill Payed, Your New Balance is $ " + payEnee.NewBalance);
+            //Reset();
+        }
+
+        internal static void PaySanaaResult(PaySanaaResponse paySanaa)
+        {
+            Home home = new Home(paySanaa.AccountId);
+            home.ShowPaySanaa(paySanaa);
+            home.Reset();
+        }
+
+        private void ShowPaySanaa(PaySanaaResponse paySanaa)
+        {
+            ScreenText.Text = "";
+            MessageBox.Show("Bill Payed, Your New Balance is $ " + paySanaa.NewBalance);
+            //Reset();
+        }
+
+        internal static void PayHondutelResult(PayHondutelResponse payHondutel)
+        {
+            Home home = new Home(payHondutel.AccountId);
+            home.ShowPayHondutel(payHondutel);
+            home.Reset();
+        }
+
+        private void ShowPayHondutel(PayHondutelResponse payHondutel)
+        {
+            ScreenText.Text = "";
+            MessageBox.Show("Bill Payed, Your New Balance is $ " + payHondutel.NewBalance);
+            //Reset();
         }
     }
 }
