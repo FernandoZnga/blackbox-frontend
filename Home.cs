@@ -66,12 +66,18 @@ namespace Blackbox.Client
             newPin = string.Empty;
             confirmPin = string.Empty;
             serviceOption = string.Empty;
+            billingId = string.Empty;
             action = string.Empty;
         }
 
         internal static void ShowNotEnoughBalance()
         {
             MessageBox.Show("You don't have enough balance to pay");
+        }
+
+        internal static void ShowBillAlreadyPayed()
+        {
+            MessageBox.Show("Alert! Billing already Payed");
         }
 
         internal static void ShowBillingIdInvalid()
@@ -618,7 +624,7 @@ namespace Blackbox.Client
                     Reset();
                 }
             }
-            else if (serviceOption.Length == 1)
+            else if (action == "PayService" && serviceOption.Length == 1)
             {
                 action = "BillingId";
                 ScreenText.AppendText(Environment.NewLine);

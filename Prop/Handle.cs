@@ -56,6 +56,10 @@ namespace Blackbox.Client.Prop
                     {
                         Home.ShowNotEnoughBalance();
                     }
+                    else if (generalResponse.Response == 904)
+                    {
+                        Home.ShowBillAlreadyPayed();
+                    }
                 }
                 else if (api == "CcPinNumberResponse")
                 {
