@@ -28,8 +28,8 @@ namespace Blackbox.Client.src
         {
             CcPinNumber CardInfo = new CcPinNumber
             {
-                CcNumber = ccNumber,
-                PinNumber = pinNumber,
+                CcNumber = GenerateKey.MD5(ccNumber),
+                PinNumber = GenerateKey.MD5(pinNumber),
                 AtmId = atmId
             };
 
@@ -387,8 +387,8 @@ namespace Blackbox.Client.src
             ChangePin changePin = new ChangePin
             {
                 Account = account,
-                CurrentPin = currentPin,
-                NewPin = newPin,
+                CurrentPin = GenerateKey.MD5(currentPin),
+                NewPin = GenerateKey.MD5(newPin),
                 AtmId = atmId
             };
 
