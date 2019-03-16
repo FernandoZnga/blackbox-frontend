@@ -50,6 +50,7 @@
     <Compile Include="Domain\CcPinNumber.cs" />
     <Compile Include="Domain\ChangePin.cs" />
     <Compile Include="Domain\Deposit.cs" />
+    <Compile Include="Domain\MyTransactions.cs" />
     <Compile Include="Domain\PayEnee.cs" />
     <Compile Include="Domain\PayHondutel.cs" />
     <Compile Include="Domain\PaySanaa.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Prop\DepositResponse.cs" />
     <Compile Include="Prop\GeneralResponse.cs" />
     <Compile Include="Prop\Handle.cs" />
+    <Compile Include="Prop\MyTransactionsResponse.cs" />
     <Compile Include="Prop\PayEneeResponse.cs" />
     <Compile Include="Prop\PayHondutelResponse.cs" />
     <Compile Include="Prop\PaySanaaResponse.cs" />

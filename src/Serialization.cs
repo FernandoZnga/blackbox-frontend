@@ -293,6 +293,31 @@ namespace Blackbox.Client.src
             }
         }
 
+        internal static MyTransactionsResponse DeserializeMyTransactionsResponse(string xmlText)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(MyTransactionsResponse));
+            using (StringReader stringReader = new StringReader(xmlText))
+            {
+                return (MyTransactionsResponse)(xml.Deserialize(stringReader));
+            }
+        }
+
+        internal static string SerializeMyTransactionsResponse(int accountId, int response)
+        {
+            MyTransactionsResponse myTransactionsResponse = new MyTransactionsResponse
+            {
+                AccountId = accountId,
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(MyTransactionsResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, myTransactionsResponse);
+                return stringWriter.ToString();
+            };
+        }
+
         public static CcPinNumberResponse DeserializeCcPinNumberResponse(string accountInfo)
         {
             XmlSerializer xml = new XmlSerializer(typeof(CcPinNumberResponse));
@@ -459,6 +484,25 @@ namespace Blackbox.Client.src
                 payHondutel.Key = GenerateKey.MD5(stringWriter.ToString());
                 StringWriter stringWriterNew = new StringWriter();
                 xml.Serialize(stringWriterNew, payHondutel);
+                return stringWriterNew.ToString();
+            };
+        }
+
+        internal static string SerializeMyTransactions(int accountId)
+        {
+            MyTransactions myTransactions = new MyTransactions
+            {
+                AccountId = accountId,
+                AtmId = atmId
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(MyTransactions));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, myTransactions);
+                myTransactions.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, myTransactions);
                 return stringWriterNew.ToString();
             };
         }

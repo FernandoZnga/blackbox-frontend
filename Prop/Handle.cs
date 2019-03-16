@@ -60,6 +60,10 @@ namespace Blackbox.Client.Prop
                     {
                         Home.ShowBillAlreadyPayed();
                     }
+                    else if (generalResponse.Response == 999)
+                    {
+                        Home.ShowNoTransactionsMsg();
+                    }
                 }
                 else if (api == "CcPinNumberResponse")
                 {
@@ -226,6 +230,23 @@ namespace Blackbox.Client.Prop
                     else
                     {
                         Home.PayHondutelResult(payHondutel);
+                    }
+                }
+                else if (api == "MyTransactionsResponse")
+                {
+                    MyTransactionsResponse myTransactionsResponse = Serialization.DeserializeMyTransactionsResponse(xmlText);
+                    AccountBalanceResponse myTransactions = new AccountBalanceResponse
+                    {
+                        AccountId = myTransactionsResponse.AccountId,
+                        Response = myTransactionsResponse.Response
+                    };
+                    if (GenerateKey.MD5(Serialization.SerializeMyTransactionsResponse(myTransactions.AccountId, myTransactions.Response)) != myTransactionsResponse.Key)
+                    {
+                        Main.ShowInvalidTokenMessage();
+                    }
+                    else
+                    {
+                        Home.ShowMyTransactionsMsg(myTransactionsResponse);
                     }
                 }
             }

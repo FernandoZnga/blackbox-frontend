@@ -80,6 +80,11 @@ namespace Blackbox.Client
             MessageBox.Show("Alert! Billing already Payed");
         }
 
+        internal static void ShowNoTransactionsMsg()
+        {
+            MessageBox.Show("There is no transactions to List");
+        }
+
         internal static void ShowBillingIdInvalid()
         {
             MessageBox.Show("Billing Id invalid");
@@ -382,6 +387,11 @@ namespace Blackbox.Client
                 billingId += Six.Text;
                 ScreenText.AppendText(Six.Text);
             }
+        }
+
+        internal static void ShowMyTransactionsMsg(MyTransactionsResponse myTransactionsResponse)
+        {
+            MessageBox.Show("Your history was sent to your Email account.");
         }
 
         private void Seven_Click(object sender, EventArgs e)
@@ -795,6 +805,11 @@ namespace Blackbox.Client
             ScreenText.Text = "";
             MessageBox.Show("Bill Payed, Your New Balance is $ " + payHondutel.NewBalance);
             //Reset();
+        }
+
+        private void MyTransactions_Click(object sender, EventArgs e)
+        {
+            StartClient(Serialization.SerializeMyTransactions(Account));
         }
     }
 }
