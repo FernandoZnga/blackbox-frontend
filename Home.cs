@@ -19,11 +19,19 @@ namespace Blackbox.Client
         public string serviceOption = string.Empty;
         public string billingId = string.Empty;
 
+        public static double yourBalance { get; set; }
+        public static string accountTypeName { get; set; }
+        public static double newBalance { get; set; }
+        public static int accountIdDestiny { get; set; }
+        public static bool changePin { get; set; }
+        public static int response { get; set; }
+        public static int accountId { get; set; }
+
         public int Account;
 
-        public Home(int accountId)
+        public Home()
         {
-            Account = accountId;
+            // Account = accountId;
             InitializeComponent();
         }
 
@@ -31,14 +39,17 @@ namespace Blackbox.Client
         {
             Reset();
             StartClient(Serialization.SerializeAccountBalance(Account));
+            ScreenText.Text = "Your Balance is $" + yourBalance;
         }
         internal static void ShowAccountBalance(AccountBalanceResponse accountBalance)
         {
-            MessageBox.Show("Your Balance is $" + accountBalance.Balance);
+            //MessageBox.Show("Your Balance is $" + accountBalance.Balance);
+            yourBalance = accountBalance.Balance;
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
         {
+            accountId = 0;
             Hide();
             Main main = new Main();
             main.ShowDialog();
@@ -68,16 +79,25 @@ namespace Blackbox.Client
             serviceOption = string.Empty;
             billingId = string.Empty;
             action = string.Empty;
+
+            yourBalance = 0;
+            accountTypeName = string.Empty;
+            newBalance = 0;
+            accountIdDestiny = 0;
+            changePin = false;
+            response = 0;
         }
 
-        internal static void ShowNotEnoughBalance()
+        internal static void ShowNotEnoughBalance(GeneralResponse generalResponse)
         {
-            MessageBox.Show("You don't have enough balance to pay");
+            response = generalResponse.Response;
+            // MessageBox.Show("You don't have enough balance to pay");
         }
 
-        internal static void ShowBillAlreadyPayed()
+        internal static void ShowBillAlreadyPayed(GeneralResponse generalResponse)
         {
-            MessageBox.Show("Alert! Billing already Payed");
+            response = generalResponse.Response;
+            // MessageBox.Show("Alert! Bill already Payed");
         }
 
         internal static void ShowNoTransactionsMsg()
@@ -85,9 +105,10 @@ namespace Blackbox.Client
             MessageBox.Show("There is no transactions to List");
         }
 
-        internal static void ShowBillingIdInvalid()
+        internal static void ShowBillingIdInvalid(GeneralResponse generalResponse)
         {
-            MessageBox.Show("Billing Id invalid");
+            response = generalResponse.Response;
+            // MessageBox.Show("Billing Id invalid");
         }
 
         internal static void ShowAccountInvalid()
@@ -391,7 +412,7 @@ namespace Blackbox.Client
 
         internal static void ShowMyTransactionsMsg(MyTransactionsResponse myTransactionsResponse)
         {
-            MessageBox.Show("Your history was sent to your Email account.");
+            // MessageBox.Show("Your history was sent to your Email account.");
         }
 
         private void Seven_Click(object sender, EventArgs e)
@@ -576,13 +597,20 @@ namespace Blackbox.Client
             {
                 StartClient(Serialization.SerializeWithdraw(Account, 
                     Convert.ToDouble(withdrawAmount)));
-                Reset();
+
+                ScreenText.Text = "Account type: " + accountTypeName +
+                    Environment.NewLine + "Your Current Balance is $" + newBalance +
+                    Environment.NewLine + "You can take your money";
+                // Reset();
             }
             else if (action == "Deposit" && depositAmount.Length > 0)
             {
                 StartClient(Serialization.SerializeDeposit(Account, 
                     Convert.ToDouble(depositAmount)));
-                Reset();
+
+                ScreenText.Text = "Account type: " + accountTypeName +
+                    Environment.NewLine + "Your Current Balance is $" + newBalance;
+                // Reset();
             }
             else if (action == "Transfer" && transferAmount.Length == 0)
             {
@@ -601,7 +629,12 @@ namespace Blackbox.Client
                 {
                     StartClient(Serialization.SerializeTransfer(Account,
                     Convert.ToDouble(transferAmount), Convert.ToInt32(transferAccount)));
-                    Reset();
+
+                    ScreenText.Text = "Account type: " + accountTypeName +
+                        Environment.NewLine + "Transfer to the account " + accountIdDestiny + " Done!" +
+                        Environment.NewLine + "Your New Balance is $" + newBalance;
+
+                    // Reset();
                 }
                 else
                 {
@@ -631,7 +664,15 @@ namespace Blackbox.Client
                 else
                 {
                     StartClient(Serialization.SerializeChangePin(Account, currentPin, newPin));
-                    Reset();
+                    if (changePin)
+                    {
+                        ScreenText.Text = "Pin Changed Successfully";
+                    }
+                    else
+                    {
+                        ScreenText.Text = "Error Changing Your Pin - No action performed";
+                    }
+                    // Reset();
                 }
             }
             else if (action == "PayService" && serviceOption.Length == 1)
@@ -654,7 +695,25 @@ namespace Blackbox.Client
                 {
                     StartClient(Serialization.SerializePayHondutel(Account, Convert.ToInt32(billingId)));
                 }
-                Reset();
+
+                if (response == 903)
+                {
+                    ScreenText.Text  = "You don't have enough balance to pay";
+                }
+                else if (response == 904)
+                {
+                    ScreenText.Text = "Bill already payed";
+                }
+                else if (response == 902)
+                {
+                    ScreenText.Text = "Bill Number invalid";
+                }
+                else
+                {
+                    ScreenText.Text = "Bill Payed, Your New Balance is $ " + newBalance;
+                }
+
+                // Reset();
             }
             else
             {
@@ -664,17 +723,19 @@ namespace Blackbox.Client
 
         public static void WithdrawResult(WithdrawResponse withdraw)
         {
-            Home home = new Home(withdraw.AccountId);
-            home.ShowWithdraw(withdraw);
-            home.Reset();
+            accountTypeName = withdraw.AccountTypeName;
+            newBalance = withdraw.NewBalance;
+            // Home home = new Home(withdraw.AccountId);
+            // home.ShowWithdraw(withdraw);
+            // home.Reset();
         }
 
         public void ShowWithdraw(WithdrawResponse withdraw)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Account type: " + withdraw.AccountTypeName +
-                Environment.NewLine + "Your Current Balance is $" + withdraw.NewBalance +
-                Environment.NewLine + "You can take your money");
+            //ScreenText.Text = "";
+            //MessageBox.Show("Account type: " + withdraw.AccountTypeName +
+            //    Environment.NewLine + "Your Current Balance is $" + withdraw.NewBalance +
+            //    Environment.NewLine + "You can take your money");
             //Reset();
         }
 
@@ -689,16 +750,18 @@ namespace Blackbox.Client
 
         public static void DepositResult(DepositResponse deposit)
         {
-            Home home = new Home(deposit.AccountId);
-            home.ShowDeposit(deposit);
-            home.Reset();
+            accountTypeName = deposit.AccountTypeName;
+            newBalance = deposit.NewBalance;
+            // Home home = new Home(deposit.AccountId);
+            // home.ShowDeposit(deposit);
+            // home.Reset();
         }
 
         public void ShowDeposit(DepositResponse deposit)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Account type: " + deposit.AccountTypeName +
-                Environment.NewLine + "Your Current Balance is $" + deposit.NewBalance);
+            // ScreenText.Text = "";
+            // MessageBox.Show("Account type: " + deposit.AccountTypeName +
+            //     Environment.NewLine + "Your Current Balance is $" + deposit.NewBalance);
             //Reset();
         }
 
@@ -714,17 +777,20 @@ namespace Blackbox.Client
 
         internal static void TransferResult(TransferResponse transfer)
         {
-            Home home = new Home(transfer.AccountId);
-            home.ShowTransfer(transfer);
-            home.Reset();
+            accountTypeName = transfer.AccountTypeName;
+            accountIdDestiny = transfer.AccountIdDestiny;
+            newBalance = transfer.NewBalance;
+            // Home home = new Home(transfer.AccountId);
+            // home.ShowTransfer(transfer);
+            // home.Reset();
         }
 
         private void ShowTransfer(TransferResponse transfer)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Account type: " + transfer.AccountTypeName +
-                Environment.NewLine + "Transfer to the account " + transfer.AccountIdDestiny + " Done!" +
-                Environment.NewLine + "Your New Balance is $" + transfer.NewBalance);
+            // ScreenText.Text = "";
+            // MessageBox.Show("Account type: " + transfer.AccountTypeName +
+            //    Environment.NewLine + "Transfer to the account " + transfer.AccountIdDestiny + " Done!" +
+            //    Environment.NewLine + "Your New Balance is $" + transfer.NewBalance);
             //Reset();
         }
 
@@ -736,23 +802,25 @@ namespace Blackbox.Client
         }
 
 
-        internal static void ChangePinResult(ChangePinResponse changePin)
+        internal static void ChangePinResult(ChangePinResponse changePinData)
         {
-            Home home = new Home(changePin.AccountId);
-            home.ShowChangePin(changePin);
-            home.Reset();
+            changePin = true;
+            // Home home = new Home(changePin.AccountId);
+            // home.ShowChangePin(changePin);
+            // home.Reset();
         }
 
         private void ShowChangePin(ChangePinResponse changePin)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Pin Changed Successfully");
+            // ScreenText.Text = "";
+            // MessageBox.Show("Pin Changed Successfully");
             //Reset();
         }
 
         internal static void ShowErrorChangePin()
         {
-            MessageBox.Show("Error Changing your Pin. No Action performed");
+            changePin = false;
+            // MessageBox.Show("Error Changing your Pin. No Action performed");
         }
 
         private void PayService_Click(object sender, EventArgs e)
@@ -767,49 +835,53 @@ namespace Blackbox.Client
 
         internal static void PayEneeResult(PayEneeResponse payEnee)
         {
-            Home home = new Home(payEnee.AccountId);
-            home.ShowPayEnee(payEnee);
-            home.Reset();
+            newBalance = payEnee.NewBalance;
+            // Home home = new Home(payEnee.AccountId);
+            // home.ShowPayEnee(payEnee);
+            // home.Reset();
         }
 
         private void ShowPayEnee(PayEneeResponse payEnee)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Bill Payed, Your New Balance is $ " + payEnee.NewBalance);
+            // ScreenText.Text = "";
+            // MessageBox.Show("Bill Payed, Your New Balance is $ " + payEnee.NewBalance);
             //Reset();
         }
 
         internal static void PaySanaaResult(PaySanaaResponse paySanaa)
         {
-            Home home = new Home(paySanaa.AccountId);
-            home.ShowPaySanaa(paySanaa);
-            home.Reset();
+            newBalance = paySanaa.NewBalance;
+            // Home home = new Home(paySanaa.AccountId);
+            // home.ShowPaySanaa(paySanaa);
+            // home.Reset();
         }
 
         private void ShowPaySanaa(PaySanaaResponse paySanaa)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Bill Payed, Your New Balance is $ " + paySanaa.NewBalance);
+            // ScreenText.Text = "";
+            // MessageBox.Show("Bill Payed, Your New Balance is $ " + paySanaa.NewBalance);
             //Reset();
         }
 
         internal static void PayHondutelResult(PayHondutelResponse payHondutel)
         {
-            Home home = new Home(payHondutel.AccountId);
-            home.ShowPayHondutel(payHondutel);
-            home.Reset();
+            newBalance = payHondutel.NewBalance;
+            // Home home = new Home(payHondutel.AccountId);
+            // home.ShowPayHondutel(payHondutel);
+            // home.Reset();
         }
 
         private void ShowPayHondutel(PayHondutelResponse payHondutel)
         {
-            ScreenText.Text = "";
-            MessageBox.Show("Bill Payed, Your New Balance is $ " + payHondutel.NewBalance);
+            // ScreenText.Text = "";
+            // MessageBox.Show("Bill Payed, Your New Balance is $ " + payHondutel.NewBalance);
             //Reset();
         }
 
         private void MyTransactions_Click(object sender, EventArgs e)
         {
             StartClient(Serialization.SerializeMyTransactions(Account));
+            ScreenText.Text = "Your history was sent to your Email account.";
         }
     }
 }
