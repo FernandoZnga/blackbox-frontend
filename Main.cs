@@ -33,8 +33,9 @@ namespace Blackbox.Client
 
         public static void ShowHome(CcPinNumberResponse ccPinNumberResponse)
         {
+            Home.accountId = ccPinNumberResponse.Account;
             ActiveForm.Hide();
-            Home home = new Home(ccPinNumberResponse.Account);
+            Home home = new Home();
             home.ShowDialog();
         }
 

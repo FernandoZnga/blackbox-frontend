@@ -35,7 +35,7 @@
             this.Five = new System.Windows.Forms.Button();
             this.Seven = new System.Windows.Forms.Button();
             this.EnterBtn = new System.Windows.Forms.Button();
-            this.OptionBtn = new System.Windows.Forms.Button();
+            this.ChangeMyPin = new System.Windows.Forms.Button();
             this.ClearBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.Three = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
             this.Deposit = new System.Windows.Forms.Button();
             this.Transfer = new System.Windows.Forms.Button();
             this.PayService = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.MyTransactions = new System.Windows.Forms.Button();
             this.Header1 = new System.Windows.Forms.Label();
             this.ScreenText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -130,15 +130,16 @@
             this.EnterBtn.UseVisualStyleBackColor = false;
             this.EnterBtn.Click += new System.EventHandler(this.EnterBtn_Click);
             // 
-            // OptionBtn
+            // ChangeMyPin
             // 
-            this.OptionBtn.Font = new System.Drawing.Font("Segoe UI Emoji", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OptionBtn.Location = new System.Drawing.Point(196, 285);
-            this.OptionBtn.Name = "OptionBtn";
-            this.OptionBtn.Size = new System.Drawing.Size(110, 50);
-            this.OptionBtn.TabIndex = 10;
-            this.OptionBtn.Text = "_";
-            this.OptionBtn.UseVisualStyleBackColor = true;
+            this.ChangeMyPin.Font = new System.Drawing.Font("Segoe UI Emoji", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeMyPin.Location = new System.Drawing.Point(196, 285);
+            this.ChangeMyPin.Name = "ChangeMyPin";
+            this.ChangeMyPin.Size = new System.Drawing.Size(110, 50);
+            this.ChangeMyPin.TabIndex = 10;
+            this.ChangeMyPin.Text = "Change My Pin";
+            this.ChangeMyPin.UseVisualStyleBackColor = true;
+            this.ChangeMyPin.Click += new System.EventHandler(this.ChangeMyPin_Click);
             // 
             // ClearBtn
             // 
@@ -260,16 +261,18 @@
             this.PayService.TabIndex = 18;
             this.PayService.Text = "Pay Service";
             this.PayService.UseVisualStyleBackColor = true;
+            this.PayService.Click += new System.EventHandler(this.PayService_Click);
             // 
-            // button6
+            // MyTransactions
             // 
-            this.button6.Font = new System.Drawing.Font("Segoe UI Emoji", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(240, 104);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(65, 40);
-            this.button6.TabIndex = 18;
-            this.button6.Text = "Back";
-            this.button6.UseVisualStyleBackColor = true;
+            this.MyTransactions.Font = new System.Drawing.Font("Segoe UI Emoji", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MyTransactions.Location = new System.Drawing.Point(240, 104);
+            this.MyTransactions.Name = "MyTransactions";
+            this.MyTransactions.Size = new System.Drawing.Size(65, 40);
+            this.MyTransactions.TabIndex = 18;
+            this.MyTransactions.Text = "My Transactions";
+            this.MyTransactions.UseVisualStyleBackColor = true;
+            this.MyTransactions.Click += new System.EventHandler(this.MyTransactions_Click);
             // 
             // Header1
             // 
@@ -290,7 +293,6 @@
             this.ScreenText.Name = "ScreenText";
             this.ScreenText.Size = new System.Drawing.Size(134, 98);
             this.ScreenText.TabIndex = 20;
-            this.ScreenText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Home
             // 
@@ -299,7 +301,7 @@
             this.ClientSize = new System.Drawing.Size(334, 411);
             this.Controls.Add(this.ScreenText);
             this.Controls.Add(this.Header1);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.MyTransactions);
             this.Controls.Add(this.PayService);
             this.Controls.Add(this.Deposit);
             this.Controls.Add(this.Transfer);
@@ -312,7 +314,7 @@
             this.Controls.Add(this.Five);
             this.Controls.Add(this.Seven);
             this.Controls.Add(this.EnterBtn);
-            this.Controls.Add(this.OptionBtn);
+            this.Controls.Add(this.ChangeMyPin);
             this.Controls.Add(this.ClearBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.Three);
@@ -336,7 +338,7 @@
         private System.Windows.Forms.Button Five;
         private System.Windows.Forms.Button Seven;
         private System.Windows.Forms.Button EnterBtn;
-        private System.Windows.Forms.Button OptionBtn;
+        private System.Windows.Forms.Button ChangeMyPin;
         private System.Windows.Forms.Button ClearBtn;
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Button Three;
@@ -348,7 +350,7 @@
         private System.Windows.Forms.Button Deposit;
         private System.Windows.Forms.Button Transfer;
         private System.Windows.Forms.Button PayService;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button MyTransactions;
         public System.Windows.Forms.Label Header1;
         public System.Windows.Forms.TextBox ScreenText;
     }
