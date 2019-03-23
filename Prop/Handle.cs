@@ -255,6 +255,25 @@ namespace Blackbox.Client.Prop
                             Home.ShowMyTransactionsMsg(myTransactionsResponse);
                         }
                     }
+                    else if (api == "ExchangeViewResponse")
+                    {
+                        ExchangeViewResponse exchangeViewResponse = Serialization.DeserializeExchangeViewResponse(xmlText);
+                        ExchangeViewResponse exchangeView = new ExchangeViewResponse
+                        {
+                            Currency = exchangeViewResponse.Currency,
+                            Compra = exchangeViewResponse.Compra,
+                            Venta = exchangeViewResponse.Venta,
+                            Response = exchangeViewResponse.Response
+                        };
+                        if (GenerateKey.MD5(Serialization.SerializeExchangeViewResponse(exchangeView.Currency, exchangeView.Compra, exchangeView.Venta, exchangeView.Response)) != exchangeViewResponse.Key)
+                        {
+                            Main.ShowInvalidTokenMessage();
+                        }
+                        else
+                        {
+                            Home.ExchangeViewResult(exchangeViewResponse);
+                        }
+                    }
                 }
             }
         }

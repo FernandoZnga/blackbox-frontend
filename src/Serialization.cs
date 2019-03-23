@@ -346,6 +346,15 @@ namespace Blackbox.Client.src
             }
         }
 
+        internal static ExchangeViewResponse DeserializeExchangeViewResponse(string xmlText)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(ExchangeViewResponse));
+            using (StringReader stringReader = new StringReader(xmlText))
+            {
+                return (ExchangeViewResponse)(xml.Deserialize(stringReader));
+            }
+        }
+
         public static string SerializeWithdraw(int accountId, double amount)
         {
             Withdraw accountInfo = new Withdraw
@@ -363,6 +372,24 @@ namespace Blackbox.Client.src
                 StringWriter stringWriterNew = new StringWriter();
                 xml.Serialize(stringWriterNew, accountInfo);
                 return stringWriterNew.ToString();
+            };
+        }
+
+        internal static string SerializeExchangeViewResponse(string currency, double compra, double venta, int response)
+        {
+            ExchangeViewResponse exchangeResponse = new ExchangeViewResponse
+            {
+                Currency = currency,
+                Compra = compra,
+                Venta = venta,
+                Response = response
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(ExchangeViewResponse));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, exchangeResponse);
+                return stringWriter.ToString();
             };
         }
 
@@ -497,6 +524,25 @@ namespace Blackbox.Client.src
             };
 
             XmlSerializer xml = new XmlSerializer(typeof(MyTransactions));
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                xml.Serialize(stringWriter, myTransactions);
+                myTransactions.Key = GenerateKey.MD5(stringWriter.ToString());
+                StringWriter stringWriterNew = new StringWriter();
+                xml.Serialize(stringWriterNew, myTransactions);
+                return stringWriterNew.ToString();
+            };
+        }
+
+        internal static string SerializeExchangeView(string currency)
+        {
+            ExchangeView myTransactions = new ExchangeView
+            {
+                Currency = currency,
+                AtmId = atmId
+            };
+
+            XmlSerializer xml = new XmlSerializer(typeof(ExchangeView));
             using (StringWriter stringWriter = new StringWriter())
             {
                 xml.Serialize(stringWriter, myTransactions);

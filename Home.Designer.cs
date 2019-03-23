@@ -50,6 +50,7 @@
             this.MyTransactions = new System.Windows.Forms.Button();
             this.Header1 = new System.Windows.Forms.Label();
             this.ScreenText = new System.Windows.Forms.TextBox();
+            this.ExchangeView = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Nine
@@ -294,11 +295,22 @@
             this.ScreenText.Size = new System.Drawing.Size(134, 98);
             this.ScreenText.TabIndex = 20;
             // 
+            // ExchangeView
+            // 
+            this.ExchangeView.Location = new System.Drawing.Point(240, 144);
+            this.ExchangeView.Name = "ExchangeView";
+            this.ExchangeView.Size = new System.Drawing.Size(65, 23);
+            this.ExchangeView.TabIndex = 21;
+            this.ExchangeView.Text = "Exchange";
+            this.ExchangeView.UseVisualStyleBackColor = true;
+            this.ExchangeView.Click += new System.EventHandler(this.ExchangeView_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 411);
+            this.Controls.Add(this.ExchangeView);
             this.Controls.Add(this.ScreenText);
             this.Controls.Add(this.Header1);
             this.Controls.Add(this.MyTransactions);
@@ -353,5 +365,6 @@
         private System.Windows.Forms.Button MyTransactions;
         public System.Windows.Forms.Label Header1;
         public System.Windows.Forms.TextBox ScreenText;
+        private System.Windows.Forms.Button ExchangeView;
     }
 }

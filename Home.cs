@@ -18,6 +18,7 @@ namespace Blackbox.Client
         public string confirmPin = string.Empty;
         public string serviceOption = string.Empty;
         public string billingId = string.Empty;
+        public string exchangeOption = string.Empty;
 
         public static double yourBalance { get; set; }
         public static string accountTypeName { get; set; }
@@ -26,12 +27,15 @@ namespace Blackbox.Client
         public static bool changePin { get; set; }
         public static int response { get; set; }
         public static int accountId { get; set; }
+        public static string exchangeCurrency { get; set; }
+        public static double exchangeCompra { get; set; }
+        public static double exchangeVenta { get; set; }
 
         public int Account;
 
         public Home()
         {
-            // Account = accountId;
+            Account = accountId;
             InitializeComponent();
         }
 
@@ -79,6 +83,7 @@ namespace Blackbox.Client
             serviceOption = string.Empty;
             billingId = string.Empty;
             action = string.Empty;
+            exchangeOption = string.Empty;
 
             yourBalance = 0;
             accountTypeName = string.Empty;
@@ -138,6 +143,11 @@ namespace Blackbox.Client
                 withdrawAmount += One.Text;
                 ScreenText.AppendText(One.Text);
             }
+            else if (action == "Exchange" && exchangeOption.Length == 0)
+            {
+                exchangeOption = One.Text;
+                ScreenText.AppendText(One.Text);
+            }
             else if (action == "PayService" && serviceOption.Length == 0)
             {
                 serviceOption = One.Text;
@@ -185,6 +195,11 @@ namespace Blackbox.Client
             if (action == "Withdraw")
             {
                 withdrawAmount += Two.Text;
+                ScreenText.AppendText(Two.Text);
+            }
+            else if (action == "Exchange" && exchangeOption.Length == 0)
+            {
+                exchangeOption = Two.Text;
                 ScreenText.AppendText(Two.Text);
             }
             else if (action == "PayService" && serviceOption.Length == 0)
@@ -603,6 +618,24 @@ namespace Blackbox.Client
                     Environment.NewLine + "You can take your money";
                 // Reset();
             }
+            else if (action == "Exchange" && exchangeOption.Length > 0)
+            {
+                string Currency;
+                if (Convert.ToInt32(exchangeOption) == 1)
+                {
+                    Currency = "Dollar"; 
+                }
+                else
+                {
+                    Currency = "Euro";
+                }
+                StartClient(Serialization.SerializeExchangeView(Currency));
+
+                ScreenText.Text = "Currency: " + exchangeCurrency +
+                    Environment.NewLine + "Compra: " + exchangeCompra +
+                    Environment.NewLine + "Venta: " + exchangeVenta;
+                //////////
+            }
             else if (action == "Deposit" && depositAmount.Length > 0)
             {
                 StartClient(Serialization.SerializeDeposit(Account, 
@@ -882,6 +915,25 @@ namespace Blackbox.Client
         {
             StartClient(Serialization.SerializeMyTransactions(Account));
             ScreenText.Text = "Your history was sent to your Email account.";
+        }
+
+        private void ExchangeView_Click(object sender, EventArgs e)
+        {
+            Reset();
+            action = ExchangeView.Text;
+            exchangeOption = "";
+            ScreenText.Clear();
+            ScreenText.Text = "Select Currency" +
+                Environment.NewLine + "1: Dollar>" +
+                Environment.NewLine + "2: Euro>" +
+                Environment.NewLine + "-->";
+        }
+
+        internal static void ExchangeViewResult(ExchangeViewResponse exchangeViewResponse)
+        {
+            exchangeCurrency = exchangeViewResponse.Currency;
+            exchangeCompra = exchangeViewResponse.Compra;
+            exchangeVenta = exchangeViewResponse.Venta;
         }
     }
 }
